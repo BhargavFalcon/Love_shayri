@@ -68,7 +68,7 @@ class QuoteDetailController extends GetxController
       DatabaseHelper.instance
           .rawQuery("SELECT * FROM myShayari WHERE favourite = '1'")
           .then((value) {
-        controller.shayariList.value =
+        controller.favouriteList.value =
             value.map((e) => shayariModel.fromJson(e)).toList();
         controller.dummyShayariList.addAll(shayariList);
         controller.update();
