@@ -32,7 +32,9 @@ class HomeView extends GetWidget<HomeController> {
           ),
           actions: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(Routes.FAVOURITE_SHAYARI_LIST_SCREEN);
+              },
               child: Image.asset(
                 isDarkMode ? ImageConstant.starLight : ImageConstant.starDark,
                 height: MySize.getHeight(60),

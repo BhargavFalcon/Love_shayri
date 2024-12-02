@@ -7,6 +7,8 @@ abstract class Routes {
   static const SHAYRI_LIST_SCREEN = _Paths.SHAYRI_LIST_SCREEN;
   static const QUOTE_DETAIL = _Paths.QUOTE_DETAIL;
   static const CREATE_POST_SCREEN = _Paths.CREATE_POST_SCREEN;
+  static const FAVOURITE_SHAYARI_LIST_SCREEN =
+      _Paths.FAVOURITE_SHAYARI_LIST_SCREEN;
 }
 
 abstract class _Paths {
@@ -15,4 +17,5 @@ abstract class _Paths {
   static const SHAYRI_LIST_SCREEN = '/shayri-list-screen';
   static const QUOTE_DETAIL = '/quote-detail';
   static const CREATE_POST_SCREEN = '/create-post-screen';
+  static const FAVOURITE_SHAYARI_LIST_SCREEN = '/favourite-shayari-list-screen';
 }

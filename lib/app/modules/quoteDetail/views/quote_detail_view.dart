@@ -36,7 +36,6 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                         ? ImageConstant.arrowBackLight
                         : ImageConstant.arrowBackDark,
                   )),
-              isShowBackButton: true,
               child: Column(
                 children: [
                   Row(
@@ -74,13 +73,15 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                   alignment: Alignment.center,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color: isDarkMode
-                                        ? ColorConstants.white.withOpacity(0.2)
-                                        : ColorConstants.black.withOpacity(0.2),
+                                    color:
+                                        isDarkMode ? Colors.white : Colors.red,
                                   ),
                                   child: TextView(
                                     text: controller.toasterMessage.value,
                                     textAlign: TextAlign.center,
+                                    color: isDarkMode
+                                        ? Colors.black
+                                        : Colors.white,
                                     fontSize: 12,
                                   ),
                                 )
@@ -95,19 +96,27 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                     key: ValueKey('first'),
                                     width: double.infinity,
                                     decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: isDarkMode
-                                            ? ColorConstants.white
-                                            : ColorConstants.black,
-                                      ),
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.red,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
-                                    child: Center(
-                                      child: TextView(
-                                        text: "Create Post",
-                                        textAlign: TextAlign.center,
-                                        fontSize: 17,
-                                      ),
+                                    child: Column(
+                                      children: [
+                                        Spacer(),
+                                        Center(
+                                          child: TextView(
+                                            text: "Create Post",
+                                            textAlign: TextAlign.center,
+                                            fontWeight: FontWeight.bold,
+                                            color: isDarkMode
+                                                ? Colors.black
+                                                : Colors.white,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                      ],
                                     ),
                                   ),
                                 ),

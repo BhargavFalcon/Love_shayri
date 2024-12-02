@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:love_shayri/app/modules/favourite_shayariList_screen/controllers/favourite_shayari_list_screen_controller.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/models/shayariMiodel.dart';
 import 'package:love_shayri/service/dbManager.dart';
@@ -62,6 +63,17 @@ class QuoteDetailController extends GetxController
             : "Removed from favourite");
       },
     );
+    if (Get.isRegistered<FavouriteShayariListScreenController>()) {
+      FavouriteShayariListScreenController controller = Get.find();
+      DatabaseHelper.instance
+          .rawQuery("SELECT * FROM myShayari WHERE favourite = '1'")
+          .then((value) {
+        controller.shayariList.value =
+            value.map((e) => shayariModel.fromJson(e)).toList();
+        controller.dummyShayariList.addAll(shayariList);
+        controller.update();
+      });
+    }
     update();
   }
 

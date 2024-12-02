@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/createPostScreen/bindings/create_post_screen_binding.dart';
 import '../modules/createPostScreen/views/create_post_screen_view.dart';
+import '../modules/favourite_shayariList_screen/bindings/favourite_shayari_list_screen_binding.dart';
+import '../modules/favourite_shayariList_screen/views/favourite_shayari_list_screen_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/quoteDetail/bindings/quote_detail_binding.dart';
@@ -36,6 +38,11 @@ class AppPages {
       name: _Paths.CREATE_POST_SCREEN,
       page: () => const CreatePostScreenView(),
       binding: CreatePostScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVOURITE_SHAYARI_LIST_SCREEN,
+      page: () => const FavouriteShayariListScreenView(),
+      binding: FavouriteShayariListScreenBinding(),
     ),
   ];
 }
