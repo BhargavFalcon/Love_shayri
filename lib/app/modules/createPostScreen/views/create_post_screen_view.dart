@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../controllers/create_post_screen_controller.dart';
 
-class CreatePostScreenView extends GetView<CreatePostScreenController> {
+class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
   const CreatePostScreenView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,7 @@ class CreatePostScreenView extends GetView<CreatePostScreenController> {
                     : ImageConstant.arrowBackDark,
               )),
           child: Column(
-            children: [
-
-            ],
+            children: [],
           )),
     );
   }

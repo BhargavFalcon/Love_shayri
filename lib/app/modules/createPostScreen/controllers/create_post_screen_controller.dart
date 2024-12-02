@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
+import 'package:love_shayri/constants/stringConstants.dart';
 
 class CreatePostScreenController extends GetxController {
-  //TODO: Implement CreatePostScreenController
-
-  final count = 0.obs;
+  RxString text = "".obs;
   @override
   void onInit() {
+    if (Get.arguments != null) {
+      text.value = Get.arguments[ArgumentConstants.shayariText];
+    }
     super.onInit();
   }
 
@@ -18,6 +20,4 @@ class CreatePostScreenController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

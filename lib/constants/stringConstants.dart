@@ -8,6 +8,7 @@ class ArgumentConstants {
   static const shayariList = "shayariList";
   static const shayariModel = "shayariModel";
   static const shayariIndex = "shayariIndex";
+  static const shayariText = "shayariText";
 }
 
 class ImageConstant {

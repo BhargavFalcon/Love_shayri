@@ -89,6 +89,10 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                   onTap: () {
                                     Get.toNamed(
                                       Routes.CREATE_POST_SCREEN,
+                                      arguments: {
+                                        ArgumentConstants.shayariText:
+                                            controller.shayarimodel.value.shayariText,
+                                      }
                                     );
                                   },
                                   child: Container(
