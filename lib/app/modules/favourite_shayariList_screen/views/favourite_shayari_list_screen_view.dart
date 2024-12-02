@@ -47,18 +47,18 @@ class FavouriteShayariListScreenView
                 ),
               ),
               Spacing.height(10),
-              (isNullEmptyOrFalse(controller.shayariList))
-                  ? Center(
-                      child: Text("No Favourite Shayari Found",
-                          style: TextStyle(
-                            color: isDarkMode ? Colors.white : Colors.black,
-                            fontSize: MySize.getHeight(16),
-                          )),
-                    )
-                  : Expanded(
-                      child: ListView.builder(
+              Expanded(
+                child: (isNullEmptyOrFalse(controller.favouriteList))
+                    ? Center(
+                        child: Text("No Favourite Shayari Found",
+                            style: TextStyle(
+                              color: isDarkMode ? Colors.white : Colors.black,
+                              fontSize: MySize.getHeight(16),
+                            )),
+                      )
+                    : ListView.builder(
                         padding: EdgeInsets.zero,
-                        itemCount: controller.shayariList.length,
+                        itemCount: controller.favouriteList.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding:
@@ -67,9 +67,9 @@ class FavouriteShayariListScreenView
                               onTap: () {
                                 Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
                                   ArgumentConstants.shayariCate:
-                                      controller.shayariList[index].shayariCate,
+                                      controller.favouriteList[index].shayariCate,
                                   ArgumentConstants.shayariList:
-                                      controller.shayariList,
+                                      controller.favouriteList,
                                   ArgumentConstants.shayariIndex: index,
                                 });
                               },
@@ -84,7 +84,7 @@ class FavouriteShayariListScreenView
                                 child: Center(
                                   child: Text(
                                     textAlign: TextAlign.center,
-                                    controller.shayariList[index].shayariText!,
+                                    controller.favouriteList[index].shayariText!,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: MySize.getHeight(16),
@@ -96,7 +96,7 @@ class FavouriteShayariListScreenView
                           );
                         },
                       ),
-                    )
+              )
             ],
           ),
         ),

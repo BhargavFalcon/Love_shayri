@@ -6,7 +6,7 @@ import 'package:love_shayri/models/shayariMiodel.dart';
 import 'package:love_shayri/service/dbManager.dart';
 
 class FavouriteShayariListScreenController extends GetxController {
-  RxList<shayariModel> shayariList = <shayariModel>[].obs;
+  RxList<shayariModel> favouriteList = <shayariModel>[].obs;
   RxList<shayariModel> dummyShayariList = <shayariModel>[].obs;
   TextEditingController searchController = TextEditingController();
   final List<String> colorCodes = [
@@ -24,8 +24,8 @@ class FavouriteShayariListScreenController extends GetxController {
       DatabaseHelper.instance
           .rawQuery("SELECT * FROM myShayari WHERE favourite = '1'")
           .then((value) {
-        shayariList.value = value.map((e) => shayariModel.fromJson(e)).toList();
-        dummyShayariList.addAll(shayariList);
+        favouriteList.value = value.map((e) => shayariModel.fromJson(e)).toList();
+        dummyShayariList.addAll(favouriteList);
       });
     });
     super.onInit();
@@ -49,10 +49,10 @@ class FavouriteShayariListScreenController extends GetxController {
 
   onSearch(String value) {
     if (value.isEmpty) {
-      shayariList.clear();
-      shayariList.value = List.from(dummyShayariList);
+      favouriteList.clear();
+      favouriteList.value = List.from(dummyShayariList);
     } else {
-      shayariList.value = dummyShayariList
+      favouriteList.value = dummyShayariList
           .where((element) =>
               element.shayariText!.toLowerCase().contains(value.toLowerCase()))
           .toList();
