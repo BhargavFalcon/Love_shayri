@@ -66,8 +66,8 @@ class FavouriteShayariListScreenView
                             child: InkWell(
                               onTap: () {
                                 Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
-                                  ArgumentConstants.shayariCate:
-                                      controller.favouriteList[index].shayariCate,
+                                  ArgumentConstants.shayariCate: controller
+                                      .favouriteList[index].shayariCate,
                                   ArgumentConstants.shayariList:
                                       controller.favouriteList,
                                   ArgumentConstants.shayariIndex: index,
@@ -84,7 +84,8 @@ class FavouriteShayariListScreenView
                                 child: Center(
                                   child: Text(
                                     textAlign: TextAlign.center,
-                                    controller.favouriteList[index].shayariText!,
+                                    controller
+                                        .favouriteList[index].shayariText!,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: MySize.getHeight(16),

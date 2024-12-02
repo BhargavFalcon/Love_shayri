@@ -217,8 +217,8 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                         child: AssetImageWidget(
                           lightImagePath: ImageConstant.share,
                           darkImagePath: ImageConstant.shareWhite,
-                          height: 100,
-                          width: 100,
+                          height: 80,
+                          width: 80,
                         ),
                       ),
                       ClipRRect(
