@@ -93,7 +93,6 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                   child: Container(
                                     height: 40,
                                     key: ValueKey('first'),
-                                    padding: Spacing.vertical(5),
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                       border: Border.all(
@@ -103,10 +102,12 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                       ),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
-                                    child: TextView(
-                                      text: "Create Post",
-                                      textAlign: TextAlign.center,
-                                      fontSize: 17,
+                                    child: Center(
+                                      child: TextView(
+                                        text: "Create Post",
+                                        textAlign: TextAlign.center,
+                                        fontSize: 17,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -155,11 +156,11 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                         padding: Spacing.all(16),
                                         margin: Spacing.horizontal(16),
                                         decoration: BoxDecoration(
-                                          color: isDarkMode
-                                              ? ColorConstants.white
-                                                  .withOpacity(0.2)
-                                              : ColorConstants.black
-                                                  .withOpacity(0.2),
+                                          border: Border.all(
+                                            color: isDarkMode
+                                                ? ColorConstants.white
+                                                : Colors.red,
+                                          ),
                                           borderRadius:
                                               BorderRadius.circular(8),
                                         ),
@@ -170,9 +171,10 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                               CrossAxisAlignment.center,
                                           children: [
                                             TextView(
+                                              textAlign: TextAlign.center,
                                               text: controller.shayarimodel
                                                   .value.shayariText!,
-                                              fontSize: 22,
+                                              fontSize: 20,
                                             ),
                                           ],
                                         ),
