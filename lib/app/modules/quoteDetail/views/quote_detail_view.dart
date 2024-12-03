@@ -74,7 +74,7 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color:
-                                        isDarkMode ? Colors.white : Colors.red,
+                                        isDarkMode ? Colors.white : ColorConstants.redColor,
                                   ),
                                   child: TextView(
                                     text: controller.toasterMessage.value,
@@ -87,22 +87,22 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                 )
                               : InkWell(
                                   onTap: () {
-                                    Get.toNamed(
-                                      Routes.CREATE_POST_SCREEN,
-                                      arguments: {
-                                        ArgumentConstants.shayariText:
-                                            controller.shayarimodel.value.shayariText,
-                                      }
-                                    );
+                                    Get.toNamed(Routes.CREATE_POST_SCREEN,
+                                        arguments: {
+                                          ArgumentConstants.shayariText:
+                                              controller.shayarimodel.value
+                                                  .shayariText,
+                                        });
                                   },
                                   child: Container(
+                                    alignment: Alignment.center,
                                     height: 40,
                                     key: ValueKey('first'),
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                       color: isDarkMode
                                           ? Colors.white
-                                          : Colors.red,
+                                          : ColorConstants.redColor,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Column(
@@ -172,7 +172,7 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                           border: Border.all(
                                             color: isDarkMode
                                                 ? ColorConstants.white
-                                                : Colors.red,
+                                                : ColorConstants.redColor,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(8),

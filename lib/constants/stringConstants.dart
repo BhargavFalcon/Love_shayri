@@ -48,6 +48,14 @@ class ImageConstant {
   static const arrowBackDark = '$otherImagePath/Back.png';
   static const arrowBackLight = '$otherImagePath/Back_White.png';
   static const arrowDownDark = '$otherImagePath/Down.png';
+  static const baseColorLight = '$otherImagePath/baseColorLight.png';
+  static const baseColorDark = '$otherImagePath/baseColorsDark.png';
+  static const bgImageDark = '$otherImagePath/bgImageDark.png';
+  static const bgImageLight = '$otherImagePath/bgImageLight.png';
+  static const textColorDark = '$otherImagePath/textColorDark.png';
+  static const textColorLight = '$otherImagePath/textColorLight.png';
+  static const textSizeDark = '$otherImagePath/textSizeDark.png';
+  static const textSizeLight = '$otherImagePath/textSizeLight.png';
   static const lightModeBg = '$homeImagePath/lightModeBg.png';
   static const darkModeBg = '$homeImagePath/darkModeBg.png';
   static const moreDark = '$homeImagePath/darkMore.png';
@@ -66,5 +74,4 @@ class ImageConstant {
   static const shareWhite = '$quoteImagePath/Share_White.png';
   static const prevLight = '$quoteImagePath/Prev.png';
   static const prevDark = '$quoteImagePath/Prev_White.png';
-
 }

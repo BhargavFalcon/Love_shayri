@@ -108,7 +108,7 @@ class CustomDialogs {
         content: Center(
           child: Text(desc, textAlign: TextAlign.center),
         ),
-        buttonColor: ColorConstants.primaryColor,
+        buttonColor: ColorConstants.black,
         textConfirm: "Ok",
         confirmTextColor: Colors.white,
         onConfirm: (isNullEmptyOrFalse(onTap))
