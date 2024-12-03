@@ -78,53 +78,78 @@ class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
                           Expanded(
                             child: RepaintBoundary(
                               key: controller.screenshotKey,
-                              child: Container(
-                                padding: Spacing.all(16),
-                                decoration: BoxDecoration(
-                                  color: controller.backgroundColor?.value,
-                                  image: (controller.filePath.isNotEmpty)
-                                      ? DecorationImage(
-                                          image: FileImage(
-                                              File(controller.filePath.value)),
-                                          fit: BoxFit.cover,
-                                        )
-                                      : controller.backgroundColor != null
-                                          ? null
-                                          : DecorationImage(
-                                              image: AssetImage(isDarkMode
-                                                  ? ImageConstant.darkModeBg
-                                                  : ImageConstant.lightModeBg),
-                                              fit: BoxFit.cover,
-                                            ),
-                                  border: Border.all(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    width:
-                                        (controller.isCaptureScreenShot.isTrue)
-                                            ? 0
-                                            : 1,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                      (controller.isCaptureScreenShot.isTrue)
-                                          ? 0
-                                          : 10),
-                                ),
-                                child: Padding(
-                                  padding: Spacing.horizontal(16),
-                                  child: Center(
-                                    child: TextView(
-                                      text: controller
-                                              .shayarimodel.value.shayariText ??
-                                          "No Text",
-                                      color: controller.textColor?.value,
-                                      fontSize: controller.fontSize.value,
-                                      textAlign: TextAlign.center,
-                                      fontStyle: FontStyle.italic,
+                              child: (controller.isEditByAi.value == true)
+                                  ? Container(
+                                      padding: Spacing.all(16),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(isDarkMode
+                                              ? ImageConstant.darkModeBg
+                                              : ImageConstant.lightModeBg),
+                                          fit: BoxFit.fill,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                            (controller
+                                                    .isCaptureScreenShot.isTrue)
+                                                ? 0
+                                                : 10),
+                                      ),
+                                      child: Padding(
+                                        padding: Spacing.horizontal(16),
+                                        child: Center(
+                                          child: TextView(
+                                            text: controller.shayarimodel.value
+                                                    .shayariText ??
+                                                "No Text",
+                                            color: isDarkMode
+                                                ? ColorConstants.white
+                                                : ColorConstants.black,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      padding: Spacing.all(16),
+                                      decoration: BoxDecoration(
+                                        color:
+                                            controller.backgroundColor?.value,
+                                        image: (controller.filePath.isNotEmpty)
+                                            ? DecorationImage(
+                                                image: FileImage(File(
+                                                    controller.filePath.value)),
+                                                fit: BoxFit.cover,
+                                              )
+                                            : controller.backgroundColor != null
+                                                ? null
+                                                : DecorationImage(
+                                                    image: AssetImage(isDarkMode
+                                                        ? ImageConstant
+                                                            .darkModeBg
+                                                        : ImageConstant
+                                                            .lightModeBg),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                        borderRadius: BorderRadius.circular(
+                                            (controller
+                                                    .isCaptureScreenShot.isTrue)
+                                                ? 0
+                                                : 10),
+                                      ),
+                                      child: Padding(
+                                        padding: Spacing.horizontal(16),
+                                        child: Center(
+                                          child: TextView(
+                                            text: controller.shayarimodel.value
+                                                    .shayariText ??
+                                                "No Text",
+                                            color: controller.textColor?.value,
+                                            fontSize: controller.fontSize.value,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
                             ),
                           ),
                           Spacing.height(30),
