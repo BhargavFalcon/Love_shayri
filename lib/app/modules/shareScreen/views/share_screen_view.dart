@@ -63,7 +63,7 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                                 title: "Alert",
                                 content:
                                     "WhatsApp service not available on this device",
-                                cancel: "Cancel",
+                                cancel: "",
                                 ok: "Remove",
                                 onOk: () {
                                   Get.back();
@@ -97,7 +97,7 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                                 title: "Alert",
                                 content:
                                     "Instagram service not available on this device",
-                                cancel: "Cancel",
+                                cancel: "",
                                 ok: "OK",
                                 okColor: Colors.blue,
                                 onOk: () {
@@ -131,7 +131,7 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                                 title: "Alert",
                                 content:
                                     "Facebook service not available on this device",
-                                cancel: "Cancel",
+                                cancel: "",
                                 ok: "OK",
                                 okColor: Colors.blue,
                                 onOk: () {
@@ -171,7 +171,7 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                                 title: "Alert",
                                 content:
                                     "Twitter service not available on this device",
-                                cancel: "cancel",
+                                cancel: "",
                                 ok: "OK",
                                 okColor: Colors.blue,
                                 onOk: () {

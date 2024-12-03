@@ -4,6 +4,7 @@ import 'package:love_shayri/app/modules/favourite_shayariList_screen/controllers
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/models/shayariMiodel.dart';
 import 'package:love_shayri/service/dbManager.dart';
+import 'package:share_plus/share_plus.dart';
 
 class QuoteDetailController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -105,6 +106,10 @@ class QuoteDetailController extends GetxController
     }
     shayarimodel.value = shayariList[currentIndex.value];
     startAnimation();
+  }
+
+  shareQuote() {
+    Share.share("${shayarimodel.value.shayariText}");
   }
 
   showToasterMessage(String message) {

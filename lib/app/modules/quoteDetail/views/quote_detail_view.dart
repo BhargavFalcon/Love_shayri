@@ -217,11 +217,16 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                       ),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(100),
-                        child: AssetImageWidget(
-                          lightImagePath: ImageConstant.share,
-                          darkImagePath: ImageConstant.shareWhite,
-                          height: 80,
-                          width: 80,
+                        child: InkWell(
+                          onTap: () {
+                            controller.shareQuote();
+                          },
+                          child: AssetImageWidget(
+                            lightImagePath: ImageConstant.share,
+                            darkImagePath: ImageConstant.shareWhite,
+                            height: 80,
+                            width: 80,
+                          ),
                         ),
                       ),
                       ClipRRect(
