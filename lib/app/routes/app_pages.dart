@@ -36,7 +36,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CREATE_POST_SCREEN,
-      page: () => const CreatePostScreenView(),
+      page: () => CreatePostScreenView(),
       binding: CreatePostScreenBinding(),
     ),
     GetPage(

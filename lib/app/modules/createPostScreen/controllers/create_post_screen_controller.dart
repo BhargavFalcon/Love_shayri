@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
-import 'package:love_shayri/service/ThemeService.dart';
-import 'package:provider/provider.dart';
+import 'package:love_shayri/models/shayariMiodel.dart';
 
 class CreatePostScreenController extends GetxController {
-  RxString text = "".obs;
-  bool isDarkMode = Get.context!.watch<ModelTheme>().isDark;
-  Rx<Color> baseColor = Colors.transparent.obs;
-  Rx<Color>? textColors;
-  RxInt textSize = 14.obs;
+  Rx<shayariModel> shayarimodel = shayariModel().obs;
   RxBool isEditByAi = false.obs;
+  RxDouble fontSize = 16.0.obs;
+  Rx<Color>? textColor;
+  Rx<Color>? backgroundColor;
+  Rx<Offset> offset = Offset(0, 0).obs;
+  RxBool isTextSizeVisible = false.obs;
+  RxString filePath = "".obs;
+  RxBool baseColorAlertVisible = false.obs;
+  final GlobalKey screenshotKey = GlobalKey();
+  RxBool isCaptureScreenShot = false.obs;
   @override
   void onInit() {
     if (Get.arguments != null) {
-      text.value = Get.arguments[ArgumentConstants.shayariText];
+      shayarimodel.value = Get.arguments[ArgumentConstants.shayariModel];
     }
-    textColors?.value = isDarkMode ? Colors.white : Colors.black;
     super.onInit();
   }
 
