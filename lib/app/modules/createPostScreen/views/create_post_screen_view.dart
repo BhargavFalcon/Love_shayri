@@ -42,16 +42,22 @@ class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
               },
               child: BackGroundWidget(
                 title: "Create Post",
+                leading: InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Image.asset(
+                      isDarkMode
+                          ? ImageConstant.arrowBackLight
+                          : ImageConstant.arrowBackDark,
+                    )),
                 actions: [
                   InkWell(
                     onTap: () async {
                       String? base64String =
                           await ScrollScreenshot.captureAndSaveScreenshot(
                               controller.screenshotKey);
-                      log(base64String!);
-
-                      final bytes = base64Decode(base64String);
-
+                      final bytes = base64Decode(base64String!);
                       final directory = await getApplicationCacheDirectory();
                       final imagePath = File(
                           '${directory.path}/${controller.shayarimodel.value.shayariId}.png');

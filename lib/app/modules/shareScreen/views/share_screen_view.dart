@@ -7,6 +7,8 @@ import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/service/CameraService.dart';
+import 'package:love_shayri/service/ThemeService.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../controllers/share_screen_controller.dart';
@@ -15,10 +17,19 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
   const ShareScreenView({super.key});
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = context.watch<ModelTheme>().isDark;
     return Scaffold(
       body: BackGroundWidget(
-        isShowBackButton: true,
         title: "Share Post",
+        leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Image.asset(
+              isDarkMode
+                  ? ImageConstant.arrowBackLight
+                  : ImageConstant.arrowBackDark,
+            )),
         child: Padding(
           padding: Spacing.symmetric(horizontal: 16, vertical: 8),
           child: Column(
@@ -42,16 +53,16 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                       )
                           .then(
                         (value) {
+                          print(value);
                           if (value!.contains("WHATSAPP_NOT_INSTALLED") ||
-                              value == "WhatsApp is not found") {
+                              value.contains("WhatsApp is not found")) {
                             customDialog(
                               context: context,
                               title: "Alert",
                               content:
                                   "WhatsApp service not available on this device",
-                              cancel: "",
-                              ok: "OK",
-                              okColor: Colors.blue,
+                              cancel: "Cancel",
+                              ok: "Remove",
                               onOk: () {
                                 Get.back();
                               },
@@ -77,14 +88,14 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                           .then(
                         (value) {
                           if (value!.contains("INSTAGRAM_NOT_INSTALLED") ||
-                              value ==
-                                  "Instagram app is not installed on your device") {
+                              value.contains(
+                                  "Instagram app is not installed on your device")) {
                             customDialog(
                               context: context,
                               title: "Alert",
                               content:
                                   "Instagram service not available on this device",
-                              cancel: "",
+                              cancel: "Cancel",
                               ok: "OK",
                               okColor: Colors.blue,
                               onOk: () {
@@ -118,7 +129,7 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                               title: "Alert",
                               content:
                                   "Facebook service not available on this device",
-                              cancel: "",
+                              cancel: "Cancel",
                               ok: "OK",
                               okColor: Colors.blue,
                               onOk: () {
@@ -158,7 +169,7 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                               title: "Alert",
                               content:
                                   "Twitter service not available on this device",
-                              cancel: "",
+                              cancel: "cancel",
                               ok: "OK",
                               okColor: Colors.blue,
                               onOk: () {

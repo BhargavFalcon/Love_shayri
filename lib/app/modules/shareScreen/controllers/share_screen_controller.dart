@@ -11,7 +11,6 @@ class ShareScreenController extends GetxController {
   void onInit() {
     if (Get.arguments != null) {
       shareFile = Get.arguments[ArgumentConstants.imagePath];
-      print(shareFile!.path);
     }
     super.onInit();
   }

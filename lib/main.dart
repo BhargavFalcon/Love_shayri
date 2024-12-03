@@ -23,7 +23,7 @@ Future<void> main() async {
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         theme: ThemeData(
-          fontFamily: "mmrtext",
+          // fontFamily: "mmrtext",
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,
