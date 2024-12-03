@@ -60,7 +60,7 @@ class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
                       final bytes = base64Decode(base64String!);
                       final directory = await getApplicationCacheDirectory();
                       final imagePath = File(
-                          '${directory.path}/${controller.shayarimodel.value.shayariId}.png');
+                          '${directory.path}/${DateTime.now().microsecond}.png');
                       await imagePath.writeAsBytes(bytes);
                       Get.toNamed(Routes.SHARE_SCREEN, arguments: {
                         ArgumentConstants.imagePath: imagePath,
