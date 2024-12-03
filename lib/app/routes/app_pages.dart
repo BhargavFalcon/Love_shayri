@@ -8,6 +8,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/quoteDetail/bindings/quote_detail_binding.dart';
 import '../modules/quoteDetail/views/quote_detail_view.dart';
+import '../modules/shareScreen/bindings/share_screen_binding.dart';
+import '../modules/shareScreen/views/share_screen_view.dart';
 import '../modules/shayriList_screen/bindings/shayri_list_screen_binding.dart';
 import '../modules/shayriList_screen/views/shayri_list_screen_view.dart';
 
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.FAVOURITE_SHAYARI_LIST_SCREEN,
       page: () => const FavouriteShayariListScreenView(),
       binding: FavouriteShayariListScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.SHARE_SCREEN,
+      page: () => const ShareScreenView(),
+      binding: ShareScreenBinding(),
     ),
   ];
 }

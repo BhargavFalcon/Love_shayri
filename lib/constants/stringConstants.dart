@@ -1,6 +1,10 @@
+import 'dart:io';
+
 class PrefConstant {
   static const isAdRemoved = "isAdRemoved";
   static const isDarkTheme = "isDarkTheme";
+  static String shareText =
+      "Download the app now to make creative posts every day! 🌟📱: ${(Platform.isAndroid) ? "https://play.google.com/store/apps/details?id=com.rohit.status" : "https://itunes.apple.com/us/app/id1178270657?ls=1&mt=8"}";
 }
 
 class ArgumentConstants {
@@ -9,6 +13,7 @@ class ArgumentConstants {
   static const shayariModel = "shayariModel";
   static const shayariIndex = "shayariIndex";
   static const shayariText = "shayariText";
+  static const imagePath = "imagePath";
 }
 
 class ImageConstant {
@@ -16,6 +21,7 @@ class ImageConstant {
   static const homeImagePath = "assets/images/Home";
   static const otherImagePath = "assets/images/Other";
   static const quoteImagePath = "assets/images/Quote";
+  static const shareImagePath = "assets/images/share";
   static const shayriBgImagePath = "assets/images/shayari_bg";
   static const allInOne = '$shayriBgImagePath/All In One.png';
   static const attitude = '$shayriBgImagePath/Attitude.png';
@@ -74,4 +80,17 @@ class ImageConstant {
   static const shareWhite = '$quoteImagePath/Share_White.png';
   static const prevLight = '$quoteImagePath/Prev.png';
   static const prevDark = '$quoteImagePath/Prev_White.png';
+  static const whatsAppLight = '$shareImagePath/whatsAppLight.png';
+  static const whatsAppDark = '$shareImagePath/whatsAppDark.png';
+  static const twitterLight = '$shareImagePath/twitterLight.png';
+  static const twitterDark = '$shareImagePath/twitterDark.png';
+  static const sharePostLight = '$shareImagePath/sharePostLight.png';
+  static const sharePostDark = '$shareImagePath/sharePostDark.png';
+  static const instaLight = '$shareImagePath/instaLight.png';
+  static const instaDark = '$shareImagePath/instaDark.png';
+  static const homeDark = '$shareImagePath/homeDark.png';
+  static const homeLight = '$shareImagePath/homeLight.png';
+  static const facebookLight = '$shareImagePath/facebookLight.png';
+  static const facebookDark = '$shareImagePath/facebookDark.png';
+
 }

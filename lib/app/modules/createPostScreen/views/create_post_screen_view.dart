@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:love_shayri/Widget/assetImageWidget.dart';
 import 'package:love_shayri/Widget/backgoundImageWidget.dart';
 import 'package:love_shayri/Widget/textCommanWidget.dart';
+import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/colorConstant.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
@@ -55,9 +56,9 @@ class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
                       final imagePath = File(
                           '${directory.path}/${controller.shayarimodel.value.shayariId}.png');
                       await imagePath.writeAsBytes(bytes);
-                      // Get.toNamed(Routes.SHARE_SCREEN, arguments: {
-                      //   ArgumentConstants.imagePath: imagePath,
-                      // });
+                      Get.toNamed(Routes.SHARE_SCREEN, arguments: {
+                        ArgumentConstants.imagePath: imagePath,
+                      });
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
