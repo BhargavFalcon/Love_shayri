@@ -21,7 +21,8 @@ class HomeView extends GetWidget<HomeController> {
         body: BackGroundWidget(
           leading: InkWell(
             onTap: () {
-              Provider.of<ModelTheme>(context, listen: false).changeTheme();
+              Get.toNamed(Routes.MORE_SCREEN);
+              // Provider.of<ModelTheme>(context, listen: false).changeTheme();
             },
             child: Image.asset(
               isDarkMode ? ImageConstant.moreLight : ImageConstant.moreDark,

@@ -6,6 +6,8 @@ import '../modules/favourite_shayariList_screen/bindings/favourite_shayari_list_
 import '../modules/favourite_shayariList_screen/views/favourite_shayari_list_screen_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/moreScreen/bindings/more_screen_binding.dart';
+import '../modules/moreScreen/views/more_screen_view.dart';
 import '../modules/quoteDetail/bindings/quote_detail_binding.dart';
 import '../modules/quoteDetail/views/quote_detail_view.dart';
 import '../modules/shareScreen/bindings/share_screen_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.SHARE_SCREEN,
       page: () => const ShareScreenView(),
       binding: ShareScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.MORE_SCREEN,
+      page: () => const MoreScreenView(),
+      binding: MoreScreenBinding(),
     ),
   ];
 }

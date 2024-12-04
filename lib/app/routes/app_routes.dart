@@ -10,6 +10,7 @@ abstract class Routes {
   static const FAVOURITE_SHAYARI_LIST_SCREEN =
       _Paths.FAVOURITE_SHAYARI_LIST_SCREEN;
   static const SHARE_SCREEN = _Paths.SHARE_SCREEN;
+  static const MORE_SCREEN = _Paths.MORE_SCREEN;
 }
 
 abstract class _Paths {
@@ -20,4 +21,5 @@ abstract class _Paths {
   static const CREATE_POST_SCREEN = '/create-post-screen';
   static const FAVOURITE_SHAYARI_LIST_SCREEN = '/favourite-shayari-list-screen';
   static const SHARE_SCREEN = '/share-screen';
+  static const MORE_SCREEN = '/more-screen';
 }

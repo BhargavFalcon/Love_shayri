@@ -62,6 +62,8 @@ class ImageConstant {
   static const textColorLight = '$otherImagePath/textColorLight.png';
   static const textSizeDark = '$otherImagePath/textSizeDark.png';
   static const textSizeLight = '$otherImagePath/textSizeLight.png';
+  static const arrowDark = '$otherImagePath/arrowDark.png';
+  static const arrowLight = '$otherImagePath/arrowLight.png';
   static const lightModeBg = '$homeImagePath/lightModeBg.png';
   static const darkModeBg = '$homeImagePath/darkModeBg.png';
   static const moreDark = '$homeImagePath/darkMore.png';
