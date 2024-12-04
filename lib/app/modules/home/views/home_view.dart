@@ -4,6 +4,7 @@ import 'package:love_shayri/Widget/backgoundImageWidget.dart';
 import 'package:love_shayri/Widget/textFiledWidget.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
+import 'package:love_shayri/main.dart';
 import 'package:love_shayri/service/ThemeService.dart';
 import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,6 @@ class HomeView extends GetWidget<HomeController> {
           leading: InkWell(
             onTap: () {
               Get.toNamed(Routes.MORE_SCREEN);
-              // Provider.of<ModelTheme>(context, listen: false).changeTheme();
             },
             child: Image.asset(
               isDarkMode ? ImageConstant.moreLight : ImageConstant.moreDark,
@@ -74,9 +74,11 @@ class HomeView extends GetWidget<HomeController> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        Get.toNamed(Routes.SHAYRI_LIST_SCREEN, arguments: {
-                          ArgumentConstants.shayariCate:
-                              controller.itemList[index].title,
+                        adService.showInterstitialAd(onAdDismissed: () {
+                          Get.toNamed(Routes.SHAYRI_LIST_SCREEN, arguments: {
+                            ArgumentConstants.shayariCate:
+                                controller.itemList[index].title,
+                          });
                         });
                       },
                       child: Container(

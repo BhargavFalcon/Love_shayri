@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:gma_mediation_applovin/gma_mediation_applovin.dart';
 import 'package:gma_mediation_unity/gma_mediation_unity.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:love_shayri/service/ThemeService.dart';
 import 'package:love_shayri/service/adService/ad_service.dart';
@@ -45,7 +46,7 @@ Future<void> main() async {
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         theme: ThemeData(
-          // fontFamily: "mmrtext",
+          fontFamily: GoogleFonts.titilliumWeb().fontFamily,
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,

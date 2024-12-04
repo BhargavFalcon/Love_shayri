@@ -56,6 +56,7 @@ dependencies:
   gma_mediation_unity: ^1.1.0
   gdpr_dialog_flutter: ^1.0.2
   flutter_linkify: ^6.0.0
+  google_fonts: ^6.2.1
   rate_my_app: ^2.2.0
   package_info_plus: ^8.1.1
   image_picker:
@@ -92,14 +93,3 @@ flutter:
     - assets/images/Quote/
     - assets/images/shayari_bg/
     - assets/images/share/
-
-
-
-  fonts:
-    - family: mmrtext
-      fonts:
-        - asset: assets/fonts/mmrtextb.ttf
-          weight: 600
-        - asset: assets/fonts/mmrtext.ttf
-          weight: 400
-

@@ -8,6 +8,7 @@ class PrefConstant {
   static const day = "day";
   static const month = "month";
   static const year = "year";
+  static const adCount = "adCount";
   static String bannerId = "ca-app-pub-3510832308267643/7866097010";
   static String interAdId = "ca-app-pub-3510832308267643/6553015344";
 

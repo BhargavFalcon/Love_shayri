@@ -7,6 +7,7 @@ import 'package:love_shayri/Widget/textCommanWidget.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
+import 'package:love_shayri/main.dart';
 import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:provider/provider.dart';
 
@@ -74,8 +75,9 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                   alignment: Alignment.center,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color:
-                                        isDarkMode ? Colors.white : ColorConstants.redColor,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : ColorConstants.redColor,
                                   ),
                                   child: TextView(
                                     text: controller.toasterMessage.value,
@@ -206,7 +208,9 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                         borderRadius: BorderRadius.circular(100),
                         child: InkWell(
                           onTap: () {
-                            controller.prevQuote();
+                            adService.showInterstitialAd(onAdDismissed: () {
+                              controller.prevQuote();
+                            });
                           },
                           child: AssetImageWidget(
                             lightImagePath: ImageConstant.prevLight,
@@ -234,7 +238,9 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                         borderRadius: BorderRadius.circular(100),
                         child: InkWell(
                           onTap: () {
-                            controller.nextQuote();
+                            adService.showInterstitialAd(onAdDismissed: () {
+                              controller.nextQuote();
+                            });
                           },
                           child: AssetImageWidget(
                             lightImagePath: ImageConstant.nextLight,
@@ -250,7 +256,8 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
               ),
             ),
             bottomNavigationBar: Container(
-              padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.bottom),
               child: BannerAdsWidget(),
             ),
           );

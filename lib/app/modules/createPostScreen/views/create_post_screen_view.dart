@@ -63,9 +63,13 @@ class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
                       final imagePath = File(
                           '${directory.path}/${DateTime.now().microsecond}.png');
                       await imagePath.writeAsBytes(bytes);
-                      Get.toNamed(Routes.SHARE_SCREEN, arguments: {
-                        ArgumentConstants.imagePath: imagePath,
-                      });
+                      adService.showInterstitialAd(
+                        onAdDismissed: () {
+                          Get.toNamed(Routes.SHARE_SCREEN, arguments: {
+                            ArgumentConstants.imagePath: imagePath,
+                          });
+                        },
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -326,7 +330,8 @@ class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
               ),
             ),
             bottomNavigationBar: Container(
-              padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.bottom),
               child: BannerAdsWidget(),
             ),
           );

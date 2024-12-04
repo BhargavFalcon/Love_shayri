@@ -6,6 +6,7 @@ import 'package:love_shayri/Widget/textFiledWidget.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
+import 'package:love_shayri/main.dart';
 import 'package:love_shayri/service/ThemeService.dart';
 import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:provider/provider.dart';
@@ -57,13 +58,17 @@ class ShayriListScreenView extends GetWidget<ShayriListScreenController> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
-                            ArgumentConstants.shayariCate:
-                                controller.shayariCate.value,
-                            ArgumentConstants.shayariList:
-                                controller.shayariList,
-                            ArgumentConstants.shayariIndex: index,
-                          });
+                          adService.showInterstitialAd(
+                            onAdDismissed: () {
+                              Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
+                                ArgumentConstants.shayariCate:
+                                    controller.shayariCate.value,
+                                ArgumentConstants.shayariList:
+                                    controller.shayariList,
+                                ArgumentConstants.shayariIndex: index,
+                              });
+                            },
+                          );
                         },
                         child: Container(
                           margin: Spacing.vertical(8),
@@ -93,7 +98,8 @@ class ShayriListScreenView extends GetWidget<ShayriListScreenController> {
           ),
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
           child: BannerAdsWidget(),
         ),
       );
