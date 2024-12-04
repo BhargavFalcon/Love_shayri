@@ -3,6 +3,9 @@ import 'dart:io';
 class PrefConstant {
   static const isAdRemoved = "isAdRemoved";
   static const isDarkTheme = "isDarkTheme";
+  static const bannerId = "ca-app-pub-3940256099942544/2435281174";
+  static const interAdId = "ca-app-pub-3940256099942544/4411468910";
+
   static String shareText =
       "Download the app now to make creative posts every day! 🌟📱: ${(Platform.isAndroid) ? "https://play.google.com/store/apps/details?id=com.rohit.status" : "https://itunes.apple.com/us/app/id1178270657?ls=1&mt=8"}";
 }

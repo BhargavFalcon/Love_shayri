@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../constants/stringConstants.dart';
@@ -66,10 +67,11 @@ customDialog({
         title: Text(title),
         content: Text(content),
         actions: [
+          if (cancel.isNotEmpty)
           CupertinoDialogAction(
-            onPressed: () => Navigator.pop(context, 'Cancel'),
-            child: Text(cancel, style: TextStyle(color: Colors.blue)),
-          ),
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  child: Text(cancel, style: TextStyle(color: Colors.blue)),
+                ),
           CupertinoDialogAction(
             onPressed: () => onOk(),
             child: Text(ok, style: TextStyle(color: okColor ?? Colors.red)),

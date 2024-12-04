@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gdpr_dialog_flutter/gdpr_dialog_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gma_mediation_applovin/gma_mediation_applovin.dart';
+import 'package:gma_mediation_unity/gma_mediation_unity.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:love_shayri/service/ThemeService.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +17,19 @@ GetStorage box = GetStorage();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await GdprDialogFlutter.instance
+      .showDialog(isForTest: false, testDeviceId: '')
+      .then((onValue) {
+    print('result === $onValue');
+  });
+  await MobileAds.instance.initialize();
+  await MobileAds.instance
+      .updateRequestConfiguration(RequestConfiguration(testDeviceIds: [""]));
+  GmaMediationApplovin().setHasUserConsent(true);
+  GmaMediationApplovin().setIsAgeRestrictedUser(true);
+  GmaMediationUnity().setGDPRConsent(true);
+  GmaMediationUnity().setCCPAConsent(true);
   await GetStorage.init();
   setUp();
   runApp(

@@ -7,6 +7,7 @@ import 'package:love_shayri/Widget/textCommanWidget.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
+import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../constants/colorConstant.dart';
@@ -247,6 +248,10 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                   )
                 ],
               ),
+            ),
+            bottomNavigationBar: Container(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+              child: BannerAdsWidget(),
             ),
           );
         });

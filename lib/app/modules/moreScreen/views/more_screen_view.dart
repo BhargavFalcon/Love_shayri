@@ -11,6 +11,7 @@ import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/service/ThemeService.dart';
+import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -174,6 +175,10 @@ class MoreScreenView extends GetView<MoreScreenController> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+        child: BannerAdsWidget(),
       ),
     );
   }

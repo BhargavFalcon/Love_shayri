@@ -8,6 +8,7 @@ import 'package:love_shayri/Widget/textCommanWidget.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/service/ThemeService.dart';
+import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:provider/provider.dart';
 import '../controllers/about_app_controller.dart';
 
@@ -114,6 +115,10 @@ class AboutAppView extends GetView<AboutAppController> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+        child: BannerAdsWidget(),
       ),
     );
   }

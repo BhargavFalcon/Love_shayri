@@ -14,6 +14,7 @@ import 'package:love_shayri/constants/colorConstant.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/service/ThemeService.dart';
+import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:scroll_screenshot/scroll_screenshot.dart';
@@ -323,6 +324,10 @@ class CreatePostScreenView extends GetWidget<CreatePostScreenController> {
                   ),
                 ),
               ),
+            ),
+            bottomNavigationBar: Container(
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+              child: BannerAdsWidget(),
             ),
           );
         });

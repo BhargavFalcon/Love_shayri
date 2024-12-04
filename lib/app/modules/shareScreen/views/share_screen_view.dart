@@ -8,6 +8,7 @@ import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/service/CameraService.dart';
 import 'package:love_shayri/service/ThemeService.dart';
+import 'package:love_shayri/service/adService/banner_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -57,14 +58,15 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
                           (value) {
                             print(value);
                             if (value!.contains("WHATSAPP_NOT_INSTALLED") ||
-                                value.contains("WhatsApp is not found")) {
+                                value.contains(
+                                    "WhatsApp is not installed on this device")) {
                               customDialog(
                                 context: context,
                                 title: "Alert",
                                 content:
                                     "WhatsApp service not available on this device",
                                 cancel: "",
-                                ok: "Remove",
+                                ok: "Ok",
                                 onOk: () {
                                   Get.back();
                                 },
@@ -220,6 +222,11 @@ class ShareScreenView extends GetWidget<ShareScreenController> {
               ],
             ),
           ),
+        ),
+        bottomNavigationBar: Container(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+          child: BannerAdsWidget(),
         ),
       );
     });
