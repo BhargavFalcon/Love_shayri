@@ -46,7 +46,7 @@ Future<void> main() async {
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
         theme: ThemeData(
-          fontFamily: GoogleFonts.titilliumWeb().fontFamily,
+          fontFamily: GoogleFonts.roboto().fontFamily,
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
             scrolledUnderElevation: 0,

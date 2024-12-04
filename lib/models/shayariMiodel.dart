@@ -3,11 +3,14 @@ class shayariModel {
   String? shayariText;
   String? shayariCate;
   String? favourite;
+  String? color;
 
   shayariModel({
     this.shayariId,
     this.shayariText,
     this.favourite,
+    this.shayariCate,
+    this.color,
   });
 
   shayariModel.fromJson(Map<String, dynamic> json) {
@@ -15,6 +18,7 @@ class shayariModel {
     shayariText = json['shayari_text'];
     shayariCate = json['shayari_cate'];
     favourite = json['favourite'];
+    color = json['color'];
   }
 
   Map<String, dynamic> toJson() {
@@ -23,6 +27,7 @@ class shayariModel {
     data['shayari_text'] = this.shayariText;
     data['shayari_cate'] = this.shayariCate;
     data['favourite'] = this.favourite;
+    data['color'] = this.color;
     return data;
   }
 }

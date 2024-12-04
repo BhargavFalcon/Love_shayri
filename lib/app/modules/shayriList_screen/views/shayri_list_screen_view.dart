@@ -75,7 +75,7 @@ class ShayriListScreenView extends GetWidget<ShayriListScreenController> {
                           padding: Spacing.all(16),
                           decoration: BoxDecoration(
                             color: Color(int.parse(
-                                "0xFF${controller.getRandomColor(controller.colorCodes)}")),
+                                "0xFF${controller.shayariList[index].color}")),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Center(

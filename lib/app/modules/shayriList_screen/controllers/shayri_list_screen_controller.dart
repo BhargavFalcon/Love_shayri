@@ -34,6 +34,9 @@ class ShayriListScreenController extends GetxController {
             .then((value) {
           shayariList.value =
               value.map((e) => shayariModel.fromJson(e)).toList();
+          shayariList.forEach((element) {
+            element.color = getRandomColor(colorCodes);
+          });
           dummyShayariList.addAll(shayariList);
         });
       } else if (shayariCate.value == "Valentine") {
@@ -43,6 +46,9 @@ class ShayriListScreenController extends GetxController {
             .then((value) {
           shayariList.value =
               value.map((e) => shayariModel.fromJson(e)).toList();
+          shayariList.forEach((element) {
+            element.color = getRandomColor(colorCodes);
+          });
           dummyShayariList.addAll(shayariList);
         });
       } else {
@@ -52,6 +58,9 @@ class ShayriListScreenController extends GetxController {
             .then((value) {
           shayariList.value =
               value.map((e) => shayariModel.fromJson(e)).toList();
+          shayariList.forEach((element) {
+            element.color = getRandomColor(colorCodes);
+          });
           dummyShayariList.addAll(shayariList);
         });
       }
