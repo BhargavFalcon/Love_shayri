@@ -96,4 +96,8 @@ class LocalNotificationService {
       int id, String? title, String? body, String? payload) {
     print('id $id');
   }
+
+  cancelNotification() async {
+    await _localNotificationService.cancelAll();
+  }
 }

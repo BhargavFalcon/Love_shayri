@@ -72,15 +72,12 @@ class InAppPurchaseClass {
       {required BuildContext context}) {
     purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
       if (purchaseDetails.status == PurchaseStatus.pending) {
-        // _showPendingUI();
         print("Pending");
       } else {
         if (purchaseDetails.status == PurchaseStatus.error) {
-          // _handleError(purchaseDetails.error!);
           getIt<CustomDialogs>().hideCircularDialog(context);
           print("${purchaseDetails.error}");
         } else if (purchaseDetails.status == PurchaseStatus.canceled) {
-          // _handleError(purchaseDetails.error!);
           getIt<CustomDialogs>().hideCircularDialog(context);
           print("${purchaseDetails.error}");
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||

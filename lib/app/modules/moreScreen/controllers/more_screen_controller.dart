@@ -26,7 +26,6 @@ class MoreScreenController extends GetxController
       (timeStamp) async {
         isQuoteOfTheDay.value =
             box.read(PrefConstant.isNotificationOn) ?? false;
-
         if (tabController != null) {
           bool isDarkMode = box.read(PrefConstant.isDarkTheme) ?? true;
           tabController!.index = isDarkMode ? 1 : 0;

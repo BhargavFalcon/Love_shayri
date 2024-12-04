@@ -45,11 +45,6 @@ class HomeController extends GetxController {
   void onInit() {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) async {
-        if (isNullEmptyOrFalse(box.read(PrefConstant.year))) {
-          box.write(PrefConstant.year, DateTime.now().year);
-          box.write(PrefConstant.month, DateTime.now().month);
-          box.write(PrefConstant.day, DateTime.now().day);
-        }
         dummyItemList.addAll(itemList);
         await scheduleShayariNotifications();
       },
@@ -68,63 +63,68 @@ class HomeController extends GetxController {
           .toList();
     }
   }
+}
 
-  Future<void> scheduleShayariNotifications() async {
-    if (box.read(PrefConstant.isNotificationOn) ?? false) {
-      int page = box.read(PrefConstant.notificationPage) ?? 1;
-      int pageSize = 50;
-      int offset = (page - 1) * pageSize;
-      await DatabaseHelper.instance.initDatabase();
-
-      List<Map<String, dynamic>> value = await DatabaseHelper.instance.rawQuery(
-          "SELECT * FROM myShayari ORDER BY shayari_id ASC LIMIT $pageSize OFFSET $offset");
-
-      box.write(PrefConstant.notificationPage, page + 1);
-      List<shayariModel> shayariList =
-          value.map((e) => shayariModel.fromJson(e)).toList();
-      shayariList.shuffle();
-
-      int mid = shayariList.length ~/ 2;
-      List<shayariModel> morningShayari = shayariList.take(mid).toList();
-      List<shayariModel> nightShayari = shayariList.skip(mid).toList();
-
-      for (int i = 0; i < morningShayari.length; i++) {
-        shayariModel shayarimodel = morningShayari[i];
-        service.showScheduledNotification(
-          id: i,
-          title: "Good Morning Shayari",
-          body: shayarimodel.shayariText!,
-          hours: 7,
-          year: box.read(PrefConstant.year),
-          month: box.read(PrefConstant.month),
-          day: box.read(PrefConstant.day),
-        );
-      }
-
-      for (int i = 0; i < nightShayari.length; i++) {
-        shayariModel shayarimodel = nightShayari[i];
-        service.showScheduledNotification(
-          id: i + morningShayari.length,
-          title: "Good Night Shayari",
-          body: shayarimodel.shayariText!,
-          hours: 19,
-          year: box.read(PrefConstant.year),
-          month: box.read(PrefConstant.month),
-          day: box.read(PrefConstant.day),
-        );
-      }
-
-      int year = box.read(PrefConstant.year) ?? 0;
-      int month = box.read(PrefConstant.month) ?? 1;
-      int day = box.read(PrefConstant.day) ?? 1;
-      String formattedMonth = month.toString().padLeft(2, '0');
-      String formattedDay = day.toString().padLeft(2, '0');
-      String formattedDateString = "$year-$formattedMonth-$formattedDay";
-      DateTime date = DateTime.parse(formattedDateString);
-      date = date.add(Duration(days: 1));
-      box.write(PrefConstant.year, date.year);
-      box.write(PrefConstant.month, date.month);
-      box.write(PrefConstant.day, date.day);
+Future<void> scheduleShayariNotifications() async {
+  if (box.read(PrefConstant.isNotificationOn) ?? false) {
+    if (isNullEmptyOrFalse(box.read(PrefConstant.year))) {
+      box.write(PrefConstant.year, DateTime.now().year);
+      box.write(PrefConstant.month, DateTime.now().month);
+      box.write(PrefConstant.day, DateTime.now().day);
     }
+    int page = box.read(PrefConstant.notificationPage) ?? 1;
+    int pageSize = 50;
+    int offset = (page - 1) * pageSize;
+    await DatabaseHelper.instance.initDatabase();
+
+    List<Map<String, dynamic>> value = await DatabaseHelper.instance.rawQuery(
+        "SELECT * FROM myShayari ORDER BY shayari_id ASC LIMIT $pageSize OFFSET $offset");
+
+    box.write(PrefConstant.notificationPage, page + 1);
+    List<shayariModel> shayariList =
+        value.map((e) => shayariModel.fromJson(e)).toList();
+    shayariList.shuffle();
+
+    int mid = shayariList.length ~/ 2;
+    List<shayariModel> morningShayari = shayariList.take(mid).toList();
+    List<shayariModel> nightShayari = shayariList.skip(mid).toList();
+
+    for (int i = 0; i < morningShayari.length; i++) {
+      shayariModel shayarimodel = morningShayari[i];
+      service.showScheduledNotification(
+        id: i,
+        title: "Good Morning Shayari",
+        body: shayarimodel.shayariText!,
+        hours: 7,
+        year: box.read(PrefConstant.year),
+        month: box.read(PrefConstant.month),
+        day: box.read(PrefConstant.day),
+      );
+    }
+
+    for (int i = 0; i < nightShayari.length; i++) {
+      shayariModel shayarimodel = nightShayari[i];
+      service.showScheduledNotification(
+        id: i + morningShayari.length,
+        title: "Good Night Shayari",
+        body: shayarimodel.shayariText!,
+        hours: 19,
+        year: box.read(PrefConstant.year),
+        month: box.read(PrefConstant.month),
+        day: box.read(PrefConstant.day),
+      );
+    }
+
+    int year = box.read(PrefConstant.year) ?? 0;
+    int month = box.read(PrefConstant.month) ?? 1;
+    int day = box.read(PrefConstant.day) ?? 1;
+    String formattedMonth = month.toString().padLeft(2, '0');
+    String formattedDay = day.toString().padLeft(2, '0');
+    String formattedDateString = "$year-$formattedMonth-$formattedDay";
+    DateTime date = DateTime.parse(formattedDateString);
+    date = date.add(Duration(days: 1));
+    box.write(PrefConstant.year, date.year);
+    box.write(PrefConstant.month, date.month);
+    box.write(PrefConstant.day, date.day);
   }
 }

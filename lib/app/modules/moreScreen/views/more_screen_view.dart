@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:love_shayri/Widget/assetImageWidget.dart';
 import 'package:love_shayri/Widget/backgoundImageWidget.dart';
 import 'package:love_shayri/Widget/textCommanWidget.dart';
+import 'package:love_shayri/app/modules/home/controllers/home_controller.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/progress_dialog_utils.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
@@ -249,10 +250,18 @@ class MoreScreenView extends GetWidget<MoreScreenController> {
                 value: controller.isQuoteOfTheDay.value,
                 trackColor:
                     (isDarkMode ? Colors.white : Colors.grey).withOpacity(0.2),
-                onChanged: (value) {
+                onChanged: (value) async {
                   controller.isQuoteOfTheDay.value = value;
                   box.write(PrefConstant.isNotificationOn, value);
                   controller.isQuoteOfTheDay.refresh();
+                  if (value) {
+                    box.remove(PrefConstant.day);
+                    box.remove(PrefConstant.month);
+                    box.remove(PrefConstant.year);
+                    await scheduleShayariNotifications();
+                  } else {
+                    service.cancelNotification();
+                  }
                 },
               );
             })
