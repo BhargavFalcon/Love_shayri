@@ -20,7 +20,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../controllers/more_screen_controller.dart';
 
-class MoreScreenView extends GetView<MoreScreenController> {
+class MoreScreenView extends GetWidget<MoreScreenController> {
   const MoreScreenView({super.key});
 
   @override
@@ -165,7 +165,7 @@ class MoreScreenView extends GetView<MoreScreenController> {
               InkWell(
                 onTap: () {
                   Uri uri = Uri.parse(
-                      "https://apps.apple.com/us/developer/rohit-iyer/id1150989827");
+                      "https://itunes.apple.com/us/app/id1644894456?ls=1&mt=8");
                   urlLauncher(url: uri, name: "Store");
                 },
                 child: _subItemWidget(
@@ -251,6 +251,7 @@ class MoreScreenView extends GetView<MoreScreenController> {
                     (isDarkMode ? Colors.white : Colors.grey).withOpacity(0.2),
                 onChanged: (value) {
                   controller.isQuoteOfTheDay.value = value;
+                  box.write(PrefConstant.isNotificationOn, value);
                   controller.isQuoteOfTheDay.refresh();
                 },
               );

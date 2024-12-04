@@ -17,18 +17,25 @@ class MoreScreenController extends GetxController
     remindDays: 7,
     remindLaunches: 10,
     googlePlayIdentifier: 'fr.skyost.example',
-    appStoreIdentifier: '1178270657',
+    appStoreIdentifier: '1644894456',
   );
   @override
   void onInit() {
     tabController = TabController(length: 2, vsync: this);
-    if (tabController != null) {
-      bool isDarkMode = box.read(PrefConstant.isDarkTheme) ?? true;
-      tabController!.index = isDarkMode ? 1 : 0;
-    }
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) async {
+        isQuoteOfTheDay.value =
+            box.read(PrefConstant.isNotificationOn) ?? false;
+
+        if (tabController != null) {
+          bool isDarkMode = box.read(PrefConstant.isDarkTheme) ?? true;
+          tabController!.index = isDarkMode ? 1 : 0;
+        }
+      },
+    );
+
     super.onInit();
   }
-
 
   @override
   void onReady() {

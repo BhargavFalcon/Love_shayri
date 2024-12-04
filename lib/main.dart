@@ -8,6 +8,7 @@ import 'package:gma_mediation_unity/gma_mediation_unity.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:love_shayri/service/ThemeService.dart';
 import 'package:love_shayri/service/adService/ad_service.dart';
+import 'package:love_shayri/service/local_notification.dart';
 import 'package:provider/provider.dart';
 
 import 'app/routes/app_pages.dart';
@@ -16,7 +17,7 @@ import 'constants/app_module.dart';
 final getIt = GetIt.instance;
 GetStorage box = GetStorage();
 AdService adService = AdService();
-
+late final LocalNotificationService service;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,8 @@ Future<void> main() async {
   GmaMediationUnity().setGDPRConsent(true);
   GmaMediationUnity().setCCPAConsent(true);
   await GetStorage.init();
+  service = LocalNotificationService();
+  service.intialize();
   setUp();
   runApp(
     ChangeNotifierProvider(

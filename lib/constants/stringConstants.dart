@@ -3,8 +3,13 @@ import 'dart:io';
 class PrefConstant {
   static const isAdRemoved = "isAdRemoved";
   static const isDarkTheme = "isDarkTheme";
-  static const bannerId = "ca-app-pub-3510832308267643/7866097010";
-  static const interAdId = "ca-app-pub-3510832308267643/6553015344";
+  static const isNotificationOn = "isNotificationOn";
+  static const notificationPage = "notificationPage";
+  static const day = "day";
+  static const month = "month";
+  static const year = "year";
+  static String bannerId = "ca-app-pub-3510832308267643/7866097010";
+  static String interAdId = "ca-app-pub-3510832308267643/6553015344";
 
   static String shareText =
       "Find & Share the most beautiful and romantic Love Shayaris. Download Love Shayri app now: ${(Platform.isAndroid) ? "https://play.google.com/store/apps/details?id=com.rohit.status" : "https://itunes.apple.com/us/app/id1644894456?ls=1&mt=8"}";
