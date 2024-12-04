@@ -30,7 +30,7 @@ class InAppPurchaseClass {
   static List<String> _kProductIds = <String>[
     (Platform.isAndroid)
         ? "com.falcon.coinflip.premium"
-        : "com.falcon.cointoss.morecoins"
+        : "com.falcon.loveshayari.removeads"
   ];
 
   late StreamSubscription<List<PurchaseDetails>> _subscription;
@@ -266,12 +266,13 @@ class InAppPurchaseClass {
   }
 
 //Restore purchases
-  Future<void> restorePurchases() async {
+  Future<void> restorePurchases({bool isFromInit = false}) async {
     await _inAppPurchase.restorePurchases().then(
       (value) {
         print("Restore => true");
         getIt<CustomDialogs>().hideCircularDialog(Get.context!);
-        showCupertinoDialogBox(Get.context!, title: "Nothing to restore!");
+        if (!isFromInit)
+          showCupertinoDialogBox(Get.context!, title: "Nothing to restore!");
       },
     ).catchError((error) {
       print("Restore => false");

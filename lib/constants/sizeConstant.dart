@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:love_shayri/constants/progress_dialog_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -241,5 +243,46 @@ urlLauncher({required Uri url, String name = "", String? error}) async {
     print(e);
     await getIt<CustomDialogs>().getDialog(
         title: "Error", desc: error ?? "Unable to find $name in your device");
+  }
+}
+
+void hideCircularDialog(BuildContext context) {
+  Get.back();
+}
+
+void showCircularDialog(BuildContext context) {
+  CircularDialog.showLoadingDialog(context);
+}
+
+class CircularDialog {
+  static Future<void> showLoadingDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () async => false, // Prevent back button press
+          child: Center(
+            child: Container(
+              width: 150, //
+              height: 250, // Adjust the width as needed
+              child: CupertinoTheme(
+                data: CupertinoThemeData(
+                  brightness: Brightness.dark,
+                ),
+                child: CupertinoAlertDialog(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CupertinoActivityIndicator(radius: 15.0),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

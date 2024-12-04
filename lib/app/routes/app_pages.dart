@@ -16,13 +16,15 @@ import '../modules/shareScreen/bindings/share_screen_binding.dart';
 import '../modules/shareScreen/views/share_screen_view.dart';
 import '../modules/shayriList_screen/bindings/shayri_list_screen_binding.dart';
 import '../modules/shayriList_screen/views/shayri_list_screen_view.dart';
+import '../modules/splashScreen/bindings/splash_screen_binding.dart';
+import '../modules/splashScreen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.ABOUT_APP,
       page: () => const AboutAppView(),
       binding: AboutAppBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH_SCREEN,
+      page: () => const SplashScreenView(),
+      binding: SplashScreenBinding(),
     ),
   ];
 }

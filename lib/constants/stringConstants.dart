@@ -3,11 +3,11 @@ import 'dart:io';
 class PrefConstant {
   static const isAdRemoved = "isAdRemoved";
   static const isDarkTheme = "isDarkTheme";
-  static const bannerId = "ca-app-pub-3940256099942544/2435281174";
-  static const interAdId = "ca-app-pub-3940256099942544/4411468910";
+  static const bannerId = "ca-app-pub-3510832308267643/7866097010";
+  static const interAdId = "ca-app-pub-3510832308267643/6553015344";
 
   static String shareText =
-      "Download the app now to make creative posts every day! 🌟📱: ${(Platform.isAndroid) ? "https://play.google.com/store/apps/details?id=com.rohit.status" : "https://itunes.apple.com/us/app/id1178270657?ls=1&mt=8"}";
+      "Find & Share the most beautiful and romantic Love Shayaris. Download Love Shayri app now: ${(Platform.isAndroid) ? "https://play.google.com/store/apps/details?id=com.rohit.status" : "https://itunes.apple.com/us/app/id1644894456?ls=1&mt=8"}";
 }
 
 class ArgumentConstants {

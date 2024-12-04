@@ -8,10 +8,13 @@ import 'package:love_shayri/Widget/assetImageWidget.dart';
 import 'package:love_shayri/Widget/backgoundImageWidget.dart';
 import 'package:love_shayri/Widget/textCommanWidget.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
+import 'package:love_shayri/constants/progress_dialog_utils.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
+import 'package:love_shayri/main.dart';
 import 'package:love_shayri/service/ThemeService.dart';
 import 'package:love_shayri/service/adService/banner_ads.dart';
+import 'package:love_shayri/service/inAppPurchase.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -41,7 +44,12 @@ class MoreScreenView extends GetView<MoreScreenController> {
               Spacing.height(10),
               _titleWidget(title: "Remove Ads", isDarkMode: isDarkMode),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  getIt<CustomDialogs>().showCircularDialog(context);
+                  InAppPurchaseClass.getInstance.makePurchase(
+                      productId:
+                          InAppPurchaseClass.getInstance.products.first.id);
+                },
                 child: _subItemWidget(
                     title: "Remove Ads",
                     isDarkMode: isDarkMode,
@@ -52,8 +60,16 @@ class MoreScreenView extends GetView<MoreScreenController> {
                     )),
               ),
               Divider(height: 1),
-              _subItemWidget(
-                  title: "Restore", isDarkMode: isDarkMode, widget: SizedBox()),
+              InkWell(
+                onTap: () {
+                  getIt<CustomDialogs>().showCircularDialog(context);
+                  InAppPurchaseClass.getInstance.restorePurchases();
+                },
+                child: _subItemWidget(
+                    title: "Restore",
+                    isDarkMode: isDarkMode,
+                    widget: SizedBox()),
+              ),
               _titleWidget(
                   title: "Shayri", isDarkMode: isDarkMode, showBorder: true),
               _subItemWidget(

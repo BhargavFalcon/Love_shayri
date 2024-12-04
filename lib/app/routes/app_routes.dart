@@ -12,6 +12,7 @@ abstract class Routes {
   static const SHARE_SCREEN = _Paths.SHARE_SCREEN;
   static const MORE_SCREEN = _Paths.MORE_SCREEN;
   static const ABOUT_APP = _Paths.ABOUT_APP;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
 }
 
 abstract class _Paths {
@@ -24,4 +25,5 @@ abstract class _Paths {
   static const SHARE_SCREEN = '/share-screen';
   static const MORE_SCREEN = '/more-screen';
   static const ABOUT_APP = '/about-app';
+  static const SPLASH_SCREEN = '/splash-screen';
 }
