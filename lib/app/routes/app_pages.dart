@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/aboutApp/bindings/about_app_binding.dart';
+import '../modules/aboutApp/views/about_app_view.dart';
 import '../modules/createPostScreen/bindings/create_post_screen_binding.dart';
 import '../modules/createPostScreen/views/create_post_screen_view.dart';
 import '../modules/favourite_shayariList_screen/bindings/favourite_shayari_list_screen_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.MORE_SCREEN,
       page: () => const MoreScreenView(),
       binding: MoreScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABOUT_APP,
+      page: () => const AboutAppView(),
+      binding: AboutAppBinding(),
     ),
   ];
 }

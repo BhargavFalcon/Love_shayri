@@ -94,5 +94,13 @@ class ImageConstant {
   static const homeLight = '$shareImagePath/homeLight.png';
   static const facebookLight = '$shareImagePath/facebookLight.png';
   static const facebookDark = '$shareImagePath/facebookDark.png';
-
+  static const appIcon = '$homeImagePath/App_Icon.png';
+  static const linkedinDark = '$aboutImagePath/linkedinDark.png';
+  static const linkedinLight = '$aboutImagePath/linkedinLight.png';
+  static const fbDark = '$aboutImagePath/fbDark.png';
+  static const fbLight = '$aboutImagePath/fbLight.png';
+  static const instagramDark = '$aboutImagePath/instagramDark.png';
+  static const instagramLight = '$aboutImagePath/instagramLight.png';
+  static const xDark = '$aboutImagePath/xDark.png';
+  static const xLight = '$aboutImagePath/xLight.png';
 }

@@ -115,7 +115,7 @@ class MoreScreenView extends GetView<MoreScreenController> {
                   title: "About", isDarkMode: isDarkMode, showBorder: true),
               InkWell(
                 onTap: () {
-                  // Get.toNamed(Routes.ABOUT_APP);
+                  Get.toNamed(Routes.ABOUT_APP);
                 },
                 child: _subItemWidget(
                   title: "About Us & App",
