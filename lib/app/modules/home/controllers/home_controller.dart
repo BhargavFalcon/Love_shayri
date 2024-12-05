@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/main.dart';
@@ -67,14 +68,19 @@ class HomeController extends GetxController {
 
 Future<void> scheduleShayariNotifications() async {
   if (box.read(PrefConstant.isNotificationOn) ?? false) {
-    if (isNullEmptyOrFalse(box.read(PrefConstant.year))) {
-      box.write(PrefConstant.year, DateTime.now().year);
-      box.write(PrefConstant.month, DateTime.now().month);
-      box.write(PrefConstant.day, DateTime.now().day);
+    if (isNullEmptyOrFalse(box.read(PrefConstant.notificationDate))) {
+      box.write(
+        PrefConstant.notificationDate,
+        DateFormat("dd-MM-yyyy").format(DateTime.now()),
+      );
     }
+
+    DateTime notificationDate =
+        DateFormat("dd-MM-yyyy").parse(box.read(PrefConstant.notificationDate));
     int page = box.read(PrefConstant.notificationPage) ?? 1;
     int pageSize = 50;
     int offset = (page - 1) * pageSize;
+
     await DatabaseHelper.instance.initDatabase();
 
     List<Map<String, dynamic>> value = await DatabaseHelper.instance.rawQuery(
@@ -85,46 +91,42 @@ Future<void> scheduleShayariNotifications() async {
         value.map((e) => shayariModel.fromJson(e)).toList();
     shayariList.shuffle();
 
-    int mid = shayariList.length ~/ 2;
-    List<shayariModel> morningShayari = shayariList.take(mid).toList();
-    List<shayariModel> nightShayari = shayariList.skip(mid).toList();
+    int totalNotifications = shayariList.length ~/ 2; // Divide into two parts
+    List<shayariModel> morningShayariList =
+        shayariList.take(totalNotifications).toList();
+    List<shayariModel> nightShayariList =
+        shayariList.skip(totalNotifications).take(totalNotifications).toList();
 
-    for (int i = 0; i < morningShayari.length; i++) {
-      shayariModel shayarimodel = morningShayari[i];
-      service.showScheduledNotification(
-        id: i,
-        title: "Good Morning Shayari",
-        body: shayarimodel.shayariText!,
-        hours: 7,
-        year: box.read(PrefConstant.year),
-        month: box.read(PrefConstant.month),
-        day: box.read(PrefConstant.day),
+    for (int i = 0; i < totalNotifications; i++) {
+      if (i < morningShayariList.length) {
+        service.showScheduledNotification(
+          id: i,
+          title: "Good Morning Shayari",
+          body: morningShayariList[i].shayariText!,
+          hours: 7,
+          year: notificationDate.year,
+          month: notificationDate.month,
+          day: notificationDate.day,
+        );
+      }
+
+      if (i < nightShayariList.length) {
+        service.showScheduledNotification(
+          id: totalNotifications +
+              i, // Ensure unique ID for night notifications
+          title: "Good Night Shayari",
+          body: nightShayariList[i].shayariText!,
+          hours: 19,
+          year: notificationDate.year,
+          month: notificationDate.month,
+          day: notificationDate.day,
+        );
+      }
+      notificationDate = notificationDate.add(Duration(days: 1));
+      box.write(
+        PrefConstant.notificationDate,
+        DateFormat("dd-MM-yyyy").format(notificationDate),
       );
     }
-
-    for (int i = 0; i < nightShayari.length; i++) {
-      shayariModel shayarimodel = nightShayari[i];
-      service.showScheduledNotification(
-        id: i + morningShayari.length,
-        title: "Good Night Shayari",
-        body: shayarimodel.shayariText!,
-        hours: 19,
-        year: box.read(PrefConstant.year),
-        month: box.read(PrefConstant.month),
-        day: box.read(PrefConstant.day),
-      );
-    }
-
-    int year = box.read(PrefConstant.year) ?? 0;
-    int month = box.read(PrefConstant.month) ?? 1;
-    int day = box.read(PrefConstant.day) ?? 1;
-    String formattedMonth = month.toString().padLeft(2, '0');
-    String formattedDay = day.toString().padLeft(2, '0');
-    String formattedDateString = "$year-$formattedMonth-$formattedDay";
-    DateTime date = DateTime.parse(formattedDateString);
-    date = date.add(Duration(days: 1));
-    box.write(PrefConstant.year, date.year);
-    box.write(PrefConstant.month, date.month);
-    box.write(PrefConstant.day, date.day);
   }
 }

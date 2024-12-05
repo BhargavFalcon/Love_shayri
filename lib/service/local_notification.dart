@@ -67,6 +67,7 @@ class LocalNotificationService {
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(Duration(days: 1));
     }
+    print(scheduledDate);
     return scheduledDate;
   }
 

@@ -8,6 +8,7 @@ class PrefConstant {
   static const day = "day";
   static const month = "month";
   static const year = "year";
+  static const notificationDate = "notificationDate";
   static const adCount = "adCount";
   static String bannerId = (Platform.isAndroid)
       ? "ca-app-pub-3940256099942544/9214589741"
