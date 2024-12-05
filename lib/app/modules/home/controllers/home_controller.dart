@@ -104,6 +104,7 @@ Future<void> scheduleShayariNotifications() async {
           title: "Good Morning Shayari",
           body: morningShayariList[i].shayariText!,
           hours: 7,
+          shayariModel: morningShayariList[i],
           year: notificationDate.year,
           month: notificationDate.month,
           day: notificationDate.day,
@@ -113,10 +114,11 @@ Future<void> scheduleShayariNotifications() async {
       if (i < nightShayariList.length) {
         service.showScheduledNotification(
           id: totalNotifications +
-              i, // Ensure unique ID for night notifications
+              i,
           title: "Good Night Shayari",
           body: nightShayariList[i].shayariText!,
           hours: 19,
+          shayariModel: nightShayariList[i],
           year: notificationDate.year,
           month: notificationDate.month,
           day: notificationDate.day,

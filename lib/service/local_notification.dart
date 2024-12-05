@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
+import 'package:love_shayri/models/shayariMiodel.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -41,7 +42,6 @@ class LocalNotificationService {
         print("onDidReceiveNotificationResponse");
         print(details.payload.runtimeType);
         try {
-          // Input string
           String input = details.payload!;
           print("Input: $input");
           Map<String, dynamic> payload = jsonDecode(input);
@@ -99,6 +99,7 @@ class LocalNotificationService {
       {required int id,
       required String title,
       required String body,
+      required shayariModel shayariModel,
       required int year,
       required int month,
       required int day,
@@ -108,6 +109,7 @@ class LocalNotificationService {
       id,
       title,
       body,
+      payload: jsonEncode(shayariModel.toJson()),
       _nextInstanceOfTime(
           year: year, month: month, day: day, hour: hours, minute: 0),
       details,
