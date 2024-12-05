@@ -106,23 +106,25 @@ class MoreScreenView extends GetWidget<MoreScreenController> {
                     },
                     tabs: [
                       SizedBox(
-                        height: 25,
+                        height: 35,
                         child: Center(
                           child: TextView(
                             text: "Light Mode",
                             color: isDarkMode ? Colors.white : Colors.black,
                             textOverflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
                             fontSize: 14,
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 25,
+                        height: 35,
                         child: Center(
                           child: TextView(
                             text: "Dark Mode",
                             color: isDarkMode ? Colors.black : Colors.black,
                             textOverflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
                             fontSize: 14,
                           ),
                         ),
