@@ -261,6 +261,7 @@ class MoreScreenView extends GetWidget<MoreScreenController> {
                     box.remove(PrefConstant.day);
                     box.remove(PrefConstant.month);
                     box.remove(PrefConstant.year);
+                    box.remove(PrefConstant.notificationPage);
                     await scheduleShayariNotifications();
                   } else {
                     service.cancelNotification();
