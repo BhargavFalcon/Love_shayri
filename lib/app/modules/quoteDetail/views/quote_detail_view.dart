@@ -164,37 +164,27 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                                 position: controller.positionAnimation,
                                 child: Opacity(
                                   opacity: controller.opacityAnimation.value,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        padding: Spacing.all(16),
-                                        margin: Spacing.horizontal(16),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: isDarkMode
-                                                ? ColorConstants.white
-                                                : ColorConstants.redColor,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            TextView(
-                                              textAlign: TextAlign.center,
-                                              text: controller.shayarimodel
-                                                  .value.shayariText!,
-                                              fontSize: 20,
-                                            ),
-                                          ],
+                                  child: Container(
+                                    padding: Spacing.all(16),
+                                    margin: Spacing.horizontal(16),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: isDarkMode
+                                            ? ColorConstants.white
+                                            : ColorConstants.redColor,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Center(
+                                      child: SingleChildScrollView(
+                                        child: TextView(
+                                          textAlign: TextAlign.center,
+                                          text: controller
+                                              .shayarimodel.value.shayariText!,
+                                          fontSize: 20,
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               );
