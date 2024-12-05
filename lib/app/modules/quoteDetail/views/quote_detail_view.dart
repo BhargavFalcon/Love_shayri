@@ -28,7 +28,7 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
           bool isDarkMode = context.watch<ModelTheme>().isDark;
           return Scaffold(
             body: BackGroundWidget(
-              title: controller.shayariCate.value + " Shayari",
+              title: controller.shayarimodel.value.shayariCate! + " Shayari",
               leading: InkWell(
                   onTap: () {
                     Get.back();

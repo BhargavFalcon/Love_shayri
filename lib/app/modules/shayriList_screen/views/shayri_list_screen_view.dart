@@ -61,11 +61,8 @@ class ShayriListScreenView extends GetWidget<ShayriListScreenController> {
                           adService.showInterstitialAd(
                             onAdDismissed: () {
                               Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
-                                ArgumentConstants.shayariCate:
-                                    controller.shayariCate.value,
-                                ArgumentConstants.shayariList:
-                                    controller.shayariList,
-                                ArgumentConstants.shayariIndex: index,
+                                ArgumentConstants.shayariModel:
+                                    controller.shayariList[index],
                               });
                             },
                           );

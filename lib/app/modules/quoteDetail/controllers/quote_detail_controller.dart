@@ -10,23 +10,40 @@ class QuoteDetailController extends GetxController
     with GetSingleTickerProviderStateMixin {
   RxList<shayariModel> shayariList = <shayariModel>[].obs;
   Rx<shayariModel> shayarimodel = shayariModel().obs;
+  RxString queryCategory = "".obs;
   late AnimationController animationController;
   late Animation<double> opacityAnimation;
   late Animation<Offset> positionAnimation;
   RxBool isShow = false.obs;
-  RxString shayariCate = "".obs;
   RxInt currentIndex = 0.obs;
   RxBool showToaster = false.obs;
   RxString toasterMessage = "".obs;
   @override
   void onInit() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       if (Get.arguments != null) {
-        shayariCate.value = Get.arguments[ArgumentConstants.shayariCate];
-        shayariList.value =
-            RxList(Get.arguments[ArgumentConstants.shayariList] ?? []);
-        currentIndex.value = Get.arguments[ArgumentConstants.shayariIndex] ?? 0;
+        shayarimodel.value = Get.arguments[ArgumentConstants.shayariModel];
       }
+      await DatabaseHelper.instance.initDatabase();
+      if (shayarimodel.value.shayariCate == "All In One" ||
+          shayarimodel.value.shayariCate == "Best Wishes") {
+        queryCategory.value = shayarimodel.value.shayariCate!;
+      } else if (shayarimodel.value.shayariCate == "Valentine") {
+        queryCategory.value = "${shayarimodel.value.shayariCate} All Shayari";
+      } else {
+        queryCategory.value = "${shayarimodel.value.shayariCate} Shayari";
+      }
+      DatabaseHelper.instance
+          .rawQuery(
+              "SELECT * FROM myShayari WHERE shayari_cate = '$queryCategory'")
+          .then((value) {
+        shayariList.value = value.map((e) => shayariModel.fromJson(e)).toList();
+      });
+      shayariList.forEach((element) {
+        if (element.shayariId == shayarimodel.value.shayariId) {
+          currentIndex.value = shayariList.indexOf(element);
+        }
+      });
       animationController = AnimationController(
         duration: const Duration(milliseconds: 300),
         vsync: this,
@@ -42,7 +59,6 @@ class QuoteDetailController extends GetxController
       );
       isShow.value = true;
       print(isShow);
-      shayarimodel.value = shayariList[currentIndex.value];
       animationController.forward();
       update();
     });
