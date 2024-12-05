@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
@@ -47,12 +45,6 @@ class ShayriListScreenController extends GetxController {
       });
     });
     super.onInit();
-  }
-
-  String getRandomColor(List<String> colorCodes) {
-    final random = Random();
-    final randomIndex = random.nextInt(colorCodes.length);
-    return colorCodes[randomIndex];
   }
 
   @override

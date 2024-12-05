@@ -24,17 +24,15 @@ class FavouriteShayariListScreenController extends GetxController {
       DatabaseHelper.instance
           .rawQuery("SELECT * FROM myShayari WHERE favourite = '1'")
           .then((value) {
-        favouriteList.value = value.map((e) => shayariModel.fromJson(e)).toList();
+        favouriteList.value =
+            value.map((e) => shayariModel.fromJson(e)).toList();
+        for (int i = 0; i < favouriteList.length; i++) {
+          favouriteList[i].color = colorCodes[i % colorCodes.length];
+        }
         dummyShayariList.addAll(favouriteList);
       });
     });
     super.onInit();
-  }
-
-  String getRandomColor(List<String> colorCodes) {
-    final random = Random();
-    final randomIndex = random.nextInt(colorCodes.length);
-    return colorCodes[randomIndex];
   }
 
   @override
