@@ -11,6 +11,7 @@ class ShayriListScreenController extends GetxController {
   RxList<shayariModel> dummyShayariList = <shayariModel>[].obs;
   TextEditingController searchController = TextEditingController();
   RxString shayariCate = "".obs;
+  RxString queryCategory = "".obs;
   final List<String> colorCodes = [
     "D31E28",
     "3A399B",
@@ -28,42 +29,22 @@ class ShayriListScreenController extends GetxController {
       await DatabaseHelper.instance.initDatabase();
       if (shayariCate.value == "All In One" ||
           shayariCate.value == "Best Wishes") {
-        DatabaseHelper.instance
-            .rawQuery(
-                "SELECT * FROM myShayari WHERE shayari_cate = '${shayariCate.value}'")
-            .then((value) {
-          shayariList.value =
-              value.map((e) => shayariModel.fromJson(e)).toList();
-          shayariList.forEach((element) {
-            element.color = getRandomColor(colorCodes);
-          });
-          dummyShayariList.addAll(shayariList);
-        });
+        queryCategory.value = shayariCate.value;
       } else if (shayariCate.value == "Valentine") {
-        DatabaseHelper.instance
-            .rawQuery(
-                "SELECT * FROM myShayari WHERE shayari_cate = '${shayariCate.value} All Shayari'")
-            .then((value) {
-          shayariList.value =
-              value.map((e) => shayariModel.fromJson(e)).toList();
-          shayariList.forEach((element) {
-            element.color = getRandomColor(colorCodes);
-          });
-          dummyShayariList.addAll(shayariList);
-        });
+        queryCategory.value = "${shayariCate.value} All Shayari";
       } else {
-        DatabaseHelper.instance
-            .rawQuery(
-                "SELECT * FROM myShayari WHERE shayari_cate = '${shayariCate.value} Shayari'")
-            .then((value) {
-          shayariList.value =
-              value.map((e) => shayariModel.fromJson(e)).toList();
-          shayariList.forEach((element) {
-            element.color = getRandomColor(colorCodes);
-          });
-          dummyShayariList.addAll(shayariList);
-        });
+        queryCategory.value = "${shayariCate.value} Shayari";
       }
+      DatabaseHelper.instance
+          .rawQuery(
+              "SELECT * FROM myShayari WHERE shayari_cate = '$queryCategory'")
+          .then((value) {
+        shayariList.value = value.map((e) => shayariModel.fromJson(e)).toList();
+        shayariList.forEach((element) {
+          element.color = getRandomColor(colorCodes);
+        });
+        dummyShayariList.addAll(shayariList);
+      });
     });
     super.onInit();
   }
