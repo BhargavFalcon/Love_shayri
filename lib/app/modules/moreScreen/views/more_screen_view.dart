@@ -165,8 +165,9 @@ class MoreScreenView extends GetWidget<MoreScreenController> {
               Divider(height: 1),
               InkWell(
                 onTap: () {
-                  Uri uri = Uri.parse(
-                      "https://itunes.apple.com/us/app/id1644894456?ls=1&mt=8");
+                  Uri uri = Uri.parse((Platform.isAndroid)
+                      ? "https://play.google.com/store/apps/dev?id=8336750947549318654"
+                      : "https://apps.apple.com/us/developer/aditya-neelkanth/id1071406552");
                   urlLauncher(url: uri, name: "Store");
                 },
                 child: _subItemWidget(
