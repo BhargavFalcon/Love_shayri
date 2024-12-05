@@ -1,6 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+
+@pragma('vm:entry-point') // Ensure this is accessible as an entry point
+void onBackgroundNotificationResponse(NotificationResponse details) {
+  Get.offAllNamed(Routes.HOME);
+}
 
 class LocalNotificationService {
   LocalNotificationService();
@@ -26,6 +35,21 @@ class LocalNotificationService {
 
     await _localNotificationService.initialize(
       settings,
+      onDidReceiveBackgroundNotificationResponse:
+          onBackgroundNotificationResponse,
+      onDidReceiveNotificationResponse: (details) {
+        print("onDidReceiveNotificationResponse");
+        print(details.payload.runtimeType);
+        try {
+          // Input string
+          String input = details.payload!;
+          print("Input: $input");
+          Map<String, dynamic> payload = jsonDecode(input);
+          print("Payload: $payload");
+        } catch (e) {
+          print("Erasdasdror: $e");
+        }
+      },
     );
 
     _localNotificationService
