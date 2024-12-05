@@ -117,6 +117,28 @@ class LocalNotificationService {
     );
   }
 
+  Future<void> shownNotification({
+    required int id,
+    required String title,
+    required String body,
+  }) async {
+    final details = await _notificationDetails();
+    try {
+      await _localNotificationService
+          .show(
+        id,
+        title,
+        body,
+        details,
+      )
+          .then((value) {
+        print("Notification shown");
+      });
+    } catch (e) {
+      print("Error=====: $e");
+    }
+  }
+
   void onDidReceiveLocalNotification(
       int id, String? title, String? body, String? payload) {
     print('id $id');

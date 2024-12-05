@@ -244,5 +244,14 @@
 	</array>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3510832308267643~1492260358</string>
+	<key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We need access to send you notifications.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>We need access to send you notifications.</string>
 </dict>
 </plist>

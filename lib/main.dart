@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gdpr_dialog_flutter/gdpr_dialog_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
@@ -21,7 +22,6 @@ AdService adService = AdService();
 late final LocalNotificationService service;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
   await GdprDialogFlutter.instance
       .showDialog(isForTest: false, testDeviceId: '')
       .then((onValue) {
@@ -37,6 +37,7 @@ Future<void> main() async {
   await GetStorage.init();
   service = LocalNotificationService();
   service.intialize();
+  requestPermissions();
   setUp();
   runApp(
     ChangeNotifierProvider(
@@ -56,4 +57,14 @@ Future<void> main() async {
       ),
     ),
   );
+}
+
+void requestPermissions() {
+  FlutterLocalNotificationsPlugin notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  notificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin>()
+      ?.requestPermissions(alert: true, badge: true, sound: true);
 }

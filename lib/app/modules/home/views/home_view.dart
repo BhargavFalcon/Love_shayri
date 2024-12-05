@@ -35,6 +35,16 @@ class HomeView extends GetWidget<HomeController> {
           actions: [
             InkWell(
               onTap: () {
+                service.shownNotification(id: 1, title: "title", body: "body");
+              },
+              child: Icon(
+                Icons.notifications,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+            InkWell(
+              onTap: () {
                 Get.toNamed(Routes.FAVOURITE_SHAYARI_LIST_SCREEN);
               },
               child: Image.asset(
