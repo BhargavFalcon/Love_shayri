@@ -40,9 +40,9 @@ class ShayriListScreenController extends GetxController {
               "SELECT * FROM myShayari WHERE shayari_cate = '$queryCategory'")
           .then((value) {
         shayariList.value = value.map((e) => shayariModel.fromJson(e)).toList();
-        shayariList.forEach((element) {
-          element.color = getRandomColor(colorCodes);
-        });
+        for (int i = 0; i < shayariList.length; i++) {
+          shayariList[i].color = colorCodes[i % colorCodes.length];
+        }
         dummyShayariList.addAll(shayariList);
       });
     });
