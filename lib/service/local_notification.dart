@@ -6,6 +6,7 @@ import 'package:love_shayri/app/modules/quoteDetail/controllers/quote_detail_con
 import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/models/shayariMiodel.dart';
+import 'package:love_shayri/service/dbManager.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -45,7 +46,7 @@ class LocalNotificationService {
       settings,
       onDidReceiveBackgroundNotificationResponse:
           onBackgroundNotificationResponse,
-      onDidReceiveNotificationResponse: (details) {
+      onDidReceiveNotificationResponse: (details) async {
         print("onDidReceiveNotificationResponse");
         print(details.payload.runtimeType);
         try {
@@ -60,6 +61,20 @@ class LocalNotificationService {
             .fromJson(Map<String, dynamic>.from(jsonDecode(details.payload!)));
         if (Get.isRegistered<QuoteDetailController>()) {
           QuoteDetailController quoteDetailController = Get.find();
+          await DatabaseHelper.instance.initDatabase();
+          DatabaseHelper.instance
+              .rawQuery(
+                  "SELECT * FROM myShayari WHERE shayari_cate = '${shayrimodel.shayariCate}'")
+              .then((value) {
+            quoteDetailController.shayariList.value =
+                value.map((e) => shayariModel.fromJson(e)).toList();
+          });
+          quoteDetailController.shayariList.forEach((element) {
+            if (element.shayariId == shayrimodel.shayariId) {
+              quoteDetailController.currentIndex.value =
+                  quoteDetailController.shayariList.indexOf(element);
+            }
+          });
           quoteDetailController.shayarimodel.value = shayrimodel;
           quoteDetailController.update();
         } else {
