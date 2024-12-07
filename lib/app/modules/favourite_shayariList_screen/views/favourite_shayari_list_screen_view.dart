@@ -67,11 +67,8 @@ class FavouriteShayariListScreenView
                             child: InkWell(
                               onTap: () {
                                 Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
-                                  ArgumentConstants.shayariCate: controller
-                                      .favouriteList[index].shayariCate,
-                                  ArgumentConstants.shayariList:
-                                      controller.favouriteList,
-                                  ArgumentConstants.shayariIndex: index,
+                                  ArgumentConstants.shayariModel:
+                                      controller.favouriteList[index],
                                 });
                               },
                               child: Container(
@@ -103,7 +100,8 @@ class FavouriteShayariListScreenView
           ),
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
           child: BannerAdsWidget(),
         ),
       );

@@ -156,7 +156,7 @@ class QuoteDetailView extends GetWidget<QuoteDetailController> {
                   Expanded(
                     child: (controller.isShow.isFalse)
                         ? SizedBox(
-                            child: CircularProgressIndicator(),
+                            child: Center(child: CircularProgressIndicator()),
                           )
                         : AnimatedBuilder(
                             animation: controller.animationController,
