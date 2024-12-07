@@ -37,31 +37,31 @@ class HomeView extends GetWidget<HomeController> {
             ),
           ),
           actions: [
-            InkWell(
-              onTap: () async {
-                await DatabaseHelper.instance.initDatabase();
-
-                List<
-                    Map<String,
-                        dynamic>> value = await DatabaseHelper.instance.rawQuery(
-                    "SELECT * FROM myShayari ORDER BY shayari_id ASC LIMIT 50 OFFSET 1");
-                List<shayariModel> shayariList =
-                    value.map((e) => shayariModel.fromJson(e)).toList();
-                shayariList.shuffle();
-                shayariModel shayrimodel = shayariList[Random().nextInt(50)];
-                service.shownNotification(
-                  id: 1,
-                  title: "love Shayri",
-                  body: shayrimodel.shayariText!,
-                  shayariModel: shayrimodel,
-                );
-              },
-              child: Icon(
-                Icons.notification_important_rounded,
-                color: Colors.white,
-                size: 30,
-              ),
-            ),
+            // InkWell(
+            //   onTap: () async {
+            //     await DatabaseHelper.instance.initDatabase();
+            //
+            //     List<
+            //         Map<String,
+            //             dynamic>> value = await DatabaseHelper.instance.rawQuery(
+            //         "SELECT * FROM myShayari ORDER BY shayari_id ASC LIMIT 50 OFFSET 1");
+            //     List<shayariModel> shayariList =
+            //         value.map((e) => shayariModel.fromJson(e)).toList();
+            //     shayariList.shuffle();
+            //     shayariModel shayrimodel = shayariList[Random().nextInt(50)];
+            //     service.shownNotification(
+            //       id: 1,
+            //       title: "love Shayri",
+            //       body: shayrimodel.shayariText!,
+            //       shayariModel: shayrimodel,
+            //     );
+            //   },
+            //   child: Icon(
+            //     Icons.notification_important_rounded,
+            //     color: Colors.white,
+            //     size: 30,
+            //   ),
+            // ),
             InkWell(
               onTap: () {
                 Get.toNamed(Routes.FAVOURITE_SHAYARI_LIST_SCREEN);
