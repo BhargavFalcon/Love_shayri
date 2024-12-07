@@ -10,7 +10,6 @@ class QuoteDetailController extends GetxController
     with GetSingleTickerProviderStateMixin {
   RxList<shayariModel> shayariList = <shayariModel>[].obs;
   Rx<shayariModel> shayarimodel = shayariModel().obs;
-  RxString queryCategory = "".obs;
   late AnimationController animationController;
   late Animation<double> opacityAnimation;
   late Animation<Offset> positionAnimation;
@@ -25,17 +24,9 @@ class QuoteDetailController extends GetxController
         shayarimodel.value = Get.arguments[ArgumentConstants.shayariModel];
       }
       await DatabaseHelper.instance.initDatabase();
-      if (shayarimodel.value.shayariCate == "All In One" ||
-          shayarimodel.value.shayariCate == "Best Wishes") {
-        queryCategory.value = shayarimodel.value.shayariCate!;
-      } else if (shayarimodel.value.shayariCate == "Valentine") {
-        queryCategory.value = "${shayarimodel.value.shayariCate} All Shayari";
-      } else {
-        queryCategory.value = "${shayarimodel.value.shayariCate} Shayari";
-      }
       DatabaseHelper.instance
           .rawQuery(
-              "SELECT * FROM myShayari WHERE shayari_cate = '$queryCategory'")
+              "SELECT * FROM myShayari WHERE shayari_cate = '${shayarimodel.value.shayariCate}'")
           .then((value) {
         shayariList.value = value.map((e) => shayariModel.fromJson(e)).toList();
       });

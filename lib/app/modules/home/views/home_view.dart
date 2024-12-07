@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:love_shayri/Widget/backgoundImageWidget.dart';
@@ -5,8 +7,10 @@ import 'package:love_shayri/Widget/textFiledWidget.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
 import 'package:love_shayri/constants/sizeConstant.dart';
 import 'package:love_shayri/main.dart';
+import 'package:love_shayri/models/shayariMiodel.dart';
 import 'package:love_shayri/service/ThemeService.dart';
 import 'package:love_shayri/service/adService/banner_ads.dart';
+import 'package:love_shayri/service/dbManager.dart';
 import 'package:provider/provider.dart';
 import '../../../../constants/stringConstants.dart';
 import '../controllers/home_controller.dart';
@@ -33,6 +37,31 @@ class HomeView extends GetWidget<HomeController> {
             ),
           ),
           actions: [
+            InkWell(
+              onTap: () async {
+                await DatabaseHelper.instance.initDatabase();
+
+                List<
+                    Map<String,
+                        dynamic>> value = await DatabaseHelper.instance.rawQuery(
+                    "SELECT * FROM myShayari ORDER BY shayari_id ASC LIMIT 50 OFFSET 1");
+                List<shayariModel> shayariList =
+                    value.map((e) => shayariModel.fromJson(e)).toList();
+                shayariList.shuffle();
+                shayariModel shayrimodel = shayariList[Random().nextInt(50)];
+                service.shownNotification(
+                  id: 1,
+                  title: "love Shayri",
+                  body: shayrimodel.shayariText!,
+                  shayariModel: shayrimodel,
+                );
+              },
+              child: Icon(
+                Icons.notification_important_rounded,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
             InkWell(
               onTap: () {
                 Get.toNamed(Routes.FAVOURITE_SHAYARI_LIST_SCREEN);

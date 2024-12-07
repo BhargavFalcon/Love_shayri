@@ -141,6 +141,7 @@ class LocalNotificationService {
     required int id,
     required String title,
     required String body,
+    required shayariModel shayariModel,
   }) async {
     final details = await _notificationDetails();
     try {
@@ -150,6 +151,7 @@ class LocalNotificationService {
         title,
         body,
         details,
+        payload: jsonEncode(shayariModel.toJson()),
       )
           .then((value) {
         print("Notification shown");
