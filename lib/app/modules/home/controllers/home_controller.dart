@@ -113,8 +113,7 @@ Future<void> scheduleShayariNotifications() async {
 
       if (i < nightShayariList.length) {
         service.showScheduledNotification(
-          id: totalNotifications +
-              i,
+          id: totalNotifications + i,
           title: "Good Night Shayari",
           body: nightShayariList[i].shayariText!,
           hours: 19,

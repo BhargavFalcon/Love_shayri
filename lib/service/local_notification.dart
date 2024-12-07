@@ -2,14 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:love_shayri/app/modules/quoteDetail/controllers/quote_detail_controller.dart';
 import 'package:love_shayri/app/routes/app_pages.dart';
+import 'package:love_shayri/constants/stringConstants.dart';
 import 'package:love_shayri/models/shayariMiodel.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 @pragma('vm:entry-point') // Ensure this is accessible as an entry point
 void onBackgroundNotificationResponse(NotificationResponse details) {
+  shayariModel shayrimodel = shayariModel
+      .fromJson(Map<String, dynamic>.from(jsonDecode(details.payload!)));
   Get.offAllNamed(Routes.HOME);
+  Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
+    ArgumentConstants.shayariModel: shayrimodel,
+  });
 }
 
 class LocalNotificationService {
@@ -48,6 +55,17 @@ class LocalNotificationService {
           print("Payload: $payload");
         } catch (e) {
           print("Erasdasdror: $e");
+        }
+        shayariModel shayrimodel = shayariModel
+            .fromJson(Map<String, dynamic>.from(jsonDecode(details.payload!)));
+        if (Get.isRegistered<QuoteDetailController>()) {
+          QuoteDetailController quoteDetailController = Get.find();
+          quoteDetailController.shayarimodel.value = shayrimodel;
+          quoteDetailController.update();
+        } else {
+          Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
+            ArgumentConstants.shayariModel: shayrimodel,
+          });
         }
       },
     );
