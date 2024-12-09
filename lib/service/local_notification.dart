@@ -12,12 +12,19 @@ import 'package:timezone/timezone.dart' as tz;
 
 @pragma('vm:entry-point') // Ensure this is accessible as an entry point
 void onBackgroundNotificationResponse(NotificationResponse details) {
-  shayariModel shayrimodel = shayariModel
-      .fromJson(Map<String, dynamic>.from(jsonDecode(details.payload!)));
-  Get.offAllNamed(Routes.HOME);
-  Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
-    ArgumentConstants.shayariModel: shayrimodel,
-  });
+  try {
+    final payload = details.payload;
+    if (payload != null) {
+      shayariModel shayrimodel =
+          shayariModel.fromJson(Map<String, dynamic>.from(jsonDecode(payload)));
+      Get.offAllNamed(Routes.HOME);
+      Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
+        ArgumentConstants.shayariModel: shayrimodel,
+      });
+    }
+  } catch (e) {
+    print("Error in onBackgroundNotificationResponse: $e");
+  }
 }
 
 class LocalNotificationService {
@@ -25,19 +32,19 @@ class LocalNotificationService {
 
   final _localNotificationService = FlutterLocalNotificationsPlugin();
 
-  Future<void> intialize() async {
+  Future<void> initialize() async {
     tz.initializeTimeZones();
     const AndroidInitializationSettings androidInitializationSettings =
         AndroidInitializationSettings('@drawable/notification_icon');
 
-    DarwinInitializationSettings iosInitializationSettings =
+    const DarwinInitializationSettings iosInitializationSettings =
         DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
 
-    final InitializationSettings settings = InitializationSettings(
+    const InitializationSettings settings = InitializationSettings(
       android: androidInitializationSettings,
       iOS: iosInitializationSettings,
     );
@@ -47,40 +54,38 @@ class LocalNotificationService {
       onDidReceiveBackgroundNotificationResponse:
           onBackgroundNotificationResponse,
       onDidReceiveNotificationResponse: (details) async {
-        print("onDidReceiveNotificationResponse");
-        print(details.payload.runtimeType);
         try {
-          String input = details.payload!;
-          print("Input: $input");
-          Map<String, dynamic> payload = jsonDecode(input);
-          print("Payload: $payload");
-        } catch (e) {
-          print("Erasdasdror: $e");
-        }
-        shayariModel shayrimodel = shayariModel
-            .fromJson(Map<String, dynamic>.from(jsonDecode(details.payload!)));
-        if (Get.isRegistered<QuoteDetailController>()) {
-          QuoteDetailController quoteDetailController = Get.find();
-          await DatabaseHelper.instance.initDatabase();
-          DatabaseHelper.instance
-              .rawQuery(
-                  "SELECT * FROM myShayari WHERE shayari_cate = '${shayrimodel.shayariCate}'")
-              .then((value) {
-            quoteDetailController.shayariList.value =
-                value.map((e) => shayariModel.fromJson(e)).toList();
-          });
-          quoteDetailController.shayariList.forEach((element) {
-            if (element.shayariId == shayrimodel.shayariId) {
-              quoteDetailController.currentIndex.value =
-                  quoteDetailController.shayariList.indexOf(element);
+          final payload = details.payload;
+          if (payload != null) {
+            shayariModel shayrimodel =
+                shayariModel.fromJson(jsonDecode(payload));
+
+            if (Get.isRegistered<QuoteDetailController>()) {
+              final quoteDetailController = Get.find<QuoteDetailController>();
+              await DatabaseHelper.instance.initDatabase();
+              DatabaseHelper.instance
+                  .rawQuery(
+                      "SELECT * FROM myShayari WHERE shayari_cate = '${shayrimodel.shayariCate}'")
+                  .then((value) {
+                quoteDetailController.shayariList.value =
+                    value.map((e) => shayariModel.fromJson(e)).toList();
+              });
+              quoteDetailController.shayariList.forEach((element) {
+                if (element.shayariId == shayrimodel.shayariId) {
+                  quoteDetailController.currentIndex.value =
+                      quoteDetailController.shayariList.indexOf(element);
+                }
+              });
+              quoteDetailController.shayarimodel.value = shayrimodel;
+              quoteDetailController.update();
+            } else {
+              Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
+                ArgumentConstants.shayariModel: shayrimodel,
+              });
             }
-          });
-          quoteDetailController.shayarimodel.value = shayrimodel;
-          quoteDetailController.update();
-        } else {
-          Get.toNamed(Routes.QUOTE_DETAIL, arguments: {
-            ArgumentConstants.shayariModel: shayrimodel,
-          });
+          }
+        } catch (e) {
+          print("Error in onDidReceiveNotificationResponse: $e");
         }
       },
     );
@@ -111,12 +116,13 @@ class LocalNotificationService {
     );
   }
 
-  tz.TZDateTime _nextInstanceOfTime(
-      {required int year,
-      required int month,
-      required int day,
-      required int hour,
-      required int minute}) {
+  tz.TZDateTime _nextInstanceOfTime({
+    required int year,
+    required int month,
+    required int day,
+    required int hour,
+    required int minute,
+  }) {
     tz.TZDateTime scheduledDate =
         tz.TZDateTime(tz.local, year, month, day, hour, minute);
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
@@ -128,28 +134,38 @@ class LocalNotificationService {
     return scheduledDate;
   }
 
-  Future<void> showScheduledNotification(
-      {required int id,
-      required String title,
-      required String body,
-      required shayariModel shayariModel,
-      required int year,
-      required int month,
-      required int day,
-      required int hours}) async {
+  Future<void> showScheduledNotification({
+    required int id,
+    required String title,
+    required String body,
+    required shayariModel shayariModel,
+    required int year,
+    required int month,
+    required int day,
+    required int hours,
+  }) async {
     final details = await _notificationDetails();
-    await _localNotificationService.zonedSchedule(
-      id,
-      title,
-      body,
-      payload: jsonEncode(shayariModel.toJson()),
-      _nextInstanceOfTime(
-          year: year, month: month, day: day, hour: hours, minute: 0),
-      details,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-      androidScheduleMode: AndroidScheduleMode.inexact,
-    );
+    try {
+      await _localNotificationService.zonedSchedule(
+        id,
+        title,
+        body,
+        _nextInstanceOfTime(
+          year: year,
+          month: month,
+          day: day,
+          hour: hours,
+          minute: 0,
+        ),
+        details,
+        payload: jsonEncode(shayariModel.toJson()),
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidScheduleMode: AndroidScheduleMode.inexact,
+      );
+    } catch (e) {
+      print("Error scheduling notification: $e");
+    }
   }
 
   Future<void> shownNotification({
@@ -160,28 +176,19 @@ class LocalNotificationService {
   }) async {
     final details = await _notificationDetails();
     try {
-      await _localNotificationService
-          .show(
+      await _localNotificationService.show(
         id,
         title,
         body,
         details,
         payload: jsonEncode(shayariModel.toJson()),
-      )
-          .then((value) {
-        print("Notification shown");
-      });
+      );
     } catch (e) {
-      print("Error=====: $e");
+      print("Error showing notification: $e");
     }
   }
 
-  void onDidReceiveLocalNotification(
-      int id, String? title, String? body, String? payload) {
-    print('id $id');
-  }
-
-  cancelNotification() async {
+  Future<void> cancelNotification() async {
     await _localNotificationService.cancelAll();
   }
 }

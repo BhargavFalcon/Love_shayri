@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gma_mediation_applovin/applovin_mediation_extras.dart';
@@ -71,7 +73,7 @@ class _BannerAdsWidgetState extends State<BannerAdsWidget> {
         },
       ),
       request: AdRequest(
-        mediationExtras: [applovinExtras],
+        mediationExtras: (Platform.isIOS) ? [applovinExtras] : null,
       ),
     );
     bannerAd!.load();

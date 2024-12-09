@@ -136,6 +136,7 @@ class InAppPurchaseClass {
       _consumables = <String>[];
       _purchasePending = false;
       _loading = false;
+      print("no product found");
       return;
     }
 
@@ -157,7 +158,7 @@ class InAppPurchaseClass {
       _consumables = <String>[];
       _purchasePending = false;
       _loading = false;
-      // print("Error is ${productDetailResponse.error?.message}");
+      print("Error is ${productDetailResponse.error?.message}");
       return;
     }
 
@@ -170,6 +171,7 @@ class InAppPurchaseClass {
       _consumables = <String>[];
       _purchasePending = false;
       _loading = false;
+      print("Error is ${productDetailResponse.notFoundIDs}");
       return;
     }
     print("Error message is ${productDetailResponse.error?.message}");

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gdpr_dialog_flutter/gdpr_dialog_flutter.dart';
@@ -30,13 +31,15 @@ Future<void> main() async {
   await MobileAds.instance.initialize();
   await MobileAds.instance
       .updateRequestConfiguration(RequestConfiguration(testDeviceIds: [""]));
-  GmaMediationApplovin().setHasUserConsent(true);
-  GmaMediationApplovin().setIsAgeRestrictedUser(true);
-  GmaMediationUnity().setGDPRConsent(true);
-  GmaMediationUnity().setCCPAConsent(true);
+  if (Platform.isIOS) {
+    GmaMediationApplovin().setHasUserConsent(true);
+    GmaMediationApplovin().setIsAgeRestrictedUser(true);
+    GmaMediationUnity().setGDPRConsent(true);
+    GmaMediationUnity().setCCPAConsent(true);
+  }
   await GetStorage.init();
-  service = LocalNotificationService();
-  service.intialize();
+  service = await LocalNotificationService();
+  service.initialize();
   requestPermissions();
   setUp();
   runApp(

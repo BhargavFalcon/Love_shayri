@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:gma_mediation_applovin/applovin_mediation_extras.dart';
@@ -55,7 +57,7 @@ class AdService {
     InterstitialAd.load(
       adUnitId: PrefConstant.interAdId,
       request: AdRequest(
-        mediationExtras: [applovinExtras],
+        mediationExtras: (Platform.isIOS) ? [applovinExtras] : null,
       ),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {

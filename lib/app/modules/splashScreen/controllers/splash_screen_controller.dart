@@ -16,7 +16,7 @@ class SplashScreenController extends GetxController {
         adService.loadInterstitialAd();
       }
       if (isNullEmptyOrFalse(box.read(PrefConstant.isNotificationOn))) {
-        box.write(PrefConstant.isNotificationOn, true);
+        box.write(PrefConstant.isNotificationOn, false);
       }
       Future.delayed(Duration(seconds: 2), () {
         Get.offAllNamed(Routes.HOME);

@@ -47,7 +47,8 @@ class HomeController extends GetxController {
     WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) async {
         dummyItemList.addAll(itemList);
-        await scheduleShayariNotifications();
+        await DatabaseHelper.instance.initDatabase();
+        scheduleShayariNotifications();
       },
     );
     super.onInit();
@@ -66,7 +67,7 @@ class HomeController extends GetxController {
   }
 }
 
-Future<void> scheduleShayariNotifications() async {
+scheduleShayariNotifications() {
   if (box.read(PrefConstant.isNotificationOn) ?? false) {
     if (isNullEmptyOrFalse(box.read(PrefConstant.notificationDate))) {
       box.write(
@@ -81,53 +82,58 @@ Future<void> scheduleShayariNotifications() async {
     int pageSize = 50;
     int offset = (page - 1) * pageSize;
 
-    await DatabaseHelper.instance.initDatabase();
+    DatabaseHelper.instance
+        .rawQuery(
+            "SELECT * FROM myShayari ORDER BY shayari_id ASC LIMIT $pageSize OFFSET $offset")
+        .then(
+      (value) {
+        box.write(PrefConstant.notificationPage, page + 1);
+        List<shayariModel> shayariList =
+            value.map((e) => shayariModel.fromJson(e)).toList();
+        shayariList.shuffle();
 
-    List<Map<String, dynamic>> value = await DatabaseHelper.instance.rawQuery(
-        "SELECT * FROM myShayari ORDER BY shayari_id ASC LIMIT $pageSize OFFSET $offset");
+        int totalNotifications =
+            shayariList.length ~/ 2; // Divide into two parts
+        List<shayariModel> morningShayariList =
+            shayariList.take(totalNotifications).toList();
+        List<shayariModel> nightShayariList = shayariList
+            .skip(totalNotifications)
+            .take(totalNotifications)
+            .toList();
 
-    box.write(PrefConstant.notificationPage, page + 1);
-    List<shayariModel> shayariList =
-        value.map((e) => shayariModel.fromJson(e)).toList();
-    shayariList.shuffle();
+        for (int i = 0; i < totalNotifications; i++) {
+          if (i < morningShayariList.length) {
+            service.showScheduledNotification(
+              id: i,
+              title: "Good Morning Shayari",
+              body: morningShayariList[i].shayariText!,
+              hours: 7,
+              shayariModel: morningShayariList[i],
+              year: notificationDate.year,
+              month: notificationDate.month,
+              day: notificationDate.day,
+            );
+          }
 
-    int totalNotifications = shayariList.length ~/ 2; // Divide into two parts
-    List<shayariModel> morningShayariList =
-        shayariList.take(totalNotifications).toList();
-    List<shayariModel> nightShayariList =
-        shayariList.skip(totalNotifications).take(totalNotifications).toList();
-
-    for (int i = 0; i < totalNotifications; i++) {
-      if (i < morningShayariList.length) {
-        service.showScheduledNotification(
-          id: i,
-          title: "Good Morning Shayari",
-          body: morningShayariList[i].shayariText!,
-          hours: 7,
-          shayariModel: morningShayariList[i],
-          year: notificationDate.year,
-          month: notificationDate.month,
-          day: notificationDate.day,
-        );
-      }
-
-      if (i < nightShayariList.length) {
-        service.showScheduledNotification(
-          id: totalNotifications + i,
-          title: "Good Night Shayari",
-          body: nightShayariList[i].shayariText!,
-          hours: 19,
-          shayariModel: nightShayariList[i],
-          year: notificationDate.year,
-          month: notificationDate.month,
-          day: notificationDate.day,
-        );
-      }
-      notificationDate = notificationDate.add(Duration(days: 1));
-      box.write(
-        PrefConstant.notificationDate,
-        DateFormat("dd-MM-yyyy").format(notificationDate),
-      );
-    }
+          if (i < nightShayariList.length) {
+            service.showScheduledNotification(
+              id: totalNotifications + i,
+              title: "Good Night Shayari",
+              body: nightShayariList[i].shayariText!,
+              hours: 19,
+              shayariModel: nightShayariList[i],
+              year: notificationDate.year,
+              month: notificationDate.month,
+              day: notificationDate.day,
+            );
+          }
+          notificationDate = notificationDate.add(Duration(days: 1));
+          box.write(
+            PrefConstant.notificationDate,
+            DateFormat("dd-MM-yyyy").format(notificationDate),
+          );
+        }
+      },
+    );
   }
 }
