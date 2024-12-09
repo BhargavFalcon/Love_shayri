@@ -16,7 +16,7 @@ class MoreScreenController extends GetxController
     minLaunches: 10,
     remindDays: 7,
     remindLaunches: 10,
-    googlePlayIdentifier: 'fr.skyost.example',
+    googlePlayIdentifier: 'com.falconapps.loveshayari',
     appStoreIdentifier: '1644894456',
   );
   @override

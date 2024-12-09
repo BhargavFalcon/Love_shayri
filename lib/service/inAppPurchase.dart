@@ -29,7 +29,7 @@ class InAppPurchaseClass {
 
   static List<String> _kProductIds = <String>[
     (Platform.isAndroid)
-        ? "com.falcon.coinflip.premium"
+        ? "com.falconapps.loveshayari.removeads"
         : "com.falcon.loveshayari.removeads"
   ];
 

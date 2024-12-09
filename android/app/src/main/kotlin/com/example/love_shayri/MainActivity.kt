@@ -1,4 +1,4 @@
-package com.example.love_shayri
+package com.falconapps.loveshayari
 
 import io.flutter.embedding.android.FlutterActivity
 

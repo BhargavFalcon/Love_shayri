@@ -11,12 +11,14 @@ class PrefConstant {
   static const notificationDate = "notificationDate";
   static const adCount = "adCount";
   static String bannerId = (Platform.isAndroid)
-      ? "ca-app-pub-3940256099942544/9214589741"
+      ? "ca-app-pub-3510832308267643/1315376312"
       : "ca-app-pub-3510832308267643/7866097010";
-  static String interAdId = "ca-app-pub-3510832308267643/6553015344";
+  static String interAdId = (Platform.isAndroid)
+      ? "ca-app-pub-3510832308267643/9515733294"
+      : "ca-app-pub-3510832308267643/6553015344";
 
   static String shareText =
-      "Find & Share the most beautiful and romantic Love Shayaris. Download Love Shayri app now: ${(Platform.isAndroid) ? "https://play.google.com/store/apps/details?id=com.rohit.status" : "https://itunes.apple.com/us/app/id1644894456?ls=1&mt=8"}";
+      "Find & Share the most beautiful and romantic Love Shayaris. Download Love Shayri app now: ${(Platform.isAndroid) ? "https://play.google.com/store/apps/details?id=com.falconapps.loveshayari" : "https://itunes.apple.com/us/app/id1644894456?ls=1&mt=8"}";
 }
 
 class ArgumentConstants {
