@@ -12,9 +12,7 @@ class PrefConstant {
   static const adCount = "adCount";
   static String bannerId = (Platform.isAndroid)
       ? "ca-app-pub-3940256099942544/9214589741"
-      : (Platform.isAndroid)
-          ? "ca-app-pub-3940256099942544/1033173712"
-          : "ca-app-pub-3510832308267643/7866097010";
+      : "ca-app-pub-3510832308267643/7866097010";
   static String interAdId = "ca-app-pub-3510832308267643/6553015344";
 
   static String shareText =
